@@ -421,9 +421,9 @@ class TechParticlesEngine {
 function initDarkMode() {
   const darkModeToggle = document.getElementById("dark-mode-toggle");
 
-  // Check saved preference - default is dark mode
+  // Check saved preference - default is light mode
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme !== "light") {
+  if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
     if (darkModeToggle) darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
   }

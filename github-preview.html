@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Stats Preview - Seydi Charyyev</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #fcd34d;
+    }
+
+    .preview-note {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #fcd34d;
+      margin-bottom: 30px;
+      font-size: 1.75rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #fcd34d, #fde68a);
+      border-radius: 2px;
+    }
+
+    /* === ВАРИАНТ A: Мини-статистика === */
+    .github-mini-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .mini-stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(51, 65, 85, 0.4);
+      padding: 16px 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .mini-stat:hover {
+      border-color: #fcd34d;
+      transform: translateY(-2px);
+    }
+
+    .mini-stat i {
+      font-size: 1.5rem;
+      color: #60a5fa;
+    }
+
+    .mini-stat-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mini-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .mini-stat-label {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* === ВАРИАНТ B: Карточки GitHub Readme Stats === */
+    .github-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .github-cards img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* === ВАРИАНТ C: Contribution Graph === */
+    .contribution-section {
+      margin-top: 30px;
+    }
+
+    .contribution-section h3 {
+      color: #fde68a;
+      margin-bottom: 20px;
+      font-size: 1.25rem;
+    }
+
+    .contribution-section img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* === ВАРИАНТ D: Top Repositories === */
+    .repos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .repo-card {
+      background: rgba(51, 65, 85, 0.3);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .repo-card:hover {
+      border-color: #60a5fa;
+      transform: translateY(-3px);
+    }
+
+    .repo-name {
+      color: #60a5fa;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .repo-name i {
+      font-size: 1rem;
+    }
+
+    .repo-desc {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .repo-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .repo-stats span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .repo-stats i {
+      font-size: 0.9rem;
+    }
+
+    .repo-lang {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lang-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .lang-dot.python { background: #3572A5; }
+    .lang-dot.javascript { background: #f1e05a; }
+    .lang-dot.typescript { background: #2b7489; }
+    .lang-dot.dart { background: #00B4AB; }
+
+    /* === Секция выбора === */
+    .option-label {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(71, 85, 105, 0.5);
+      margin: 40px 0;
+    }
+
+    /* Loading placeholder */
+    .loading-placeholder {
+      background: rgba(51, 65, 85, 0.3);
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      color: #64748b;
+      border: 2px dashed rgba(71, 85, 105, 0.5);
+    }
+
+    .loading-placeholder i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GitHub Stats Preview</h1>
+    <p class="preview-note">Превью для портфолио — посмотри какой вариант нравится больше</p>
+
+    <!-- ============ СЕКЦИЯ 1: Мини-статистика ============ -->
+    <div class="card">
+      <span class="option-label">Вариант A — Мини-статистика</span>
+      <h2>GitHub</h2>
+
+      <div class="github-mini-stats">
+        <div class="mini-stat">
+          <i class="fas fa-book"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value" id="repos-count">--</span>
+            <span class="mini-stat-label">Repositories</span>
+          </div>
+        </div>
+        <div class="mini-stat">
+          <i class="fas fa-star"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value" id="stars-count">--</span>
+            <span class="mini-stat-label">Total Stars</span>
+          </div>
+        </div>
+        <div class="mini-stat">
+          <i class="fas fa-users"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value" id="followers-count">--</span>
+            <span class="mini-stat-label">Followers</span>
+          </div>
+        </div>
+        <div class="mini-stat">
+          <i class="fas fa-code-branch"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value" id="forks-count">--</span>
+            <span class="mini-stat-label">Total Forks</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="color: #64748b; font-size: 0.9rem;">
+        <i class="fas fa-info-circle"></i> Данные загружаются динамически через GitHub API
+      </p>
+    </div>
+
+    <!-- ============ СЕКЦИЯ 2: GitHub Readme Stats Cards ============ -->
+    <div class="card">
+      <span class="option-label">Вариант B — Карточки Stats</span>
+      <h2>GitHub Statistics</h2>
+
+      <div class="github-cards">
+        <img src="https://github-readme-stats.vercel.app/api?username=TheSeydiCharyyev&show_icons=true&theme=tokyonight&hide_border=true&bg_color=1e293b&title_color=fcd34d&icon_color=60a5fa&text_color=e2e8f0" alt="GitHub Stats" />
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=TheSeydiCharyyev&layout=compact&theme=tokyonight&hide_border=true&bg_color=1e293b&title_color=fcd34d&text_color=e2e8f0" alt="Top Languages" />
+      </div>
+    </div>
+
+    <!-- ============ СЕКЦИЯ 3: Streak Stats ============ -->
+    <div class="card">
+      <span class="option-label">Вариант C — Streak (серия коммитов)</span>
+      <h2>Commit Streak</h2>
+
+      <div style="text-align: center;">
+        <img src="https://github-readme-streak-stats.herokuapp.com/?user=TheSeydiCharyyev&theme=tokyonight&hide_border=true&background=1e293b&ring=fcd34d&fire=fcd34d&currStreakLabel=fcd34d" alt="GitHub Streak" style="max-width: 100%; border-radius: 8px;" />
+      </div>
+    </div>
+
+    <!-- ============ СЕКЦИЯ 4: Contribution Graph ============ -->
+    <div class="card">
+      <span class="option-label">Вариант D — График контрибуций</span>
+      <h2>Contribution Activity</h2>
+
+      <div class="contribution-section">
+        <h3><i class="fas fa-chart-line"></i> Activity Graph</h3>
+        <img src="https://github-readme-activity-graph.vercel.app/graph?username=TheSeydiCharyyev&theme=tokyo-night&hide_border=true&bg_color=1e293b&color=e2e8f0&line=fcd34d&point=60a5fa" alt="Contribution Graph" />
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="contribution-section">
+        <h3><i class="fas fa-trophy"></i> Profile Trophy</h3>
+        <img src="https://github-profile-trophy.vercel.app/?username=TheSeydiCharyyev&theme=discord&no-frame=true&no-bg=true&column=4&margin-w=15" alt="GitHub Trophies" />
+      </div>
+    </div>
+
+    <!-- ============ СЕКЦИЯ 5: Top Repositories ============ -->
+    <div class="card">
+      <span class="option-label">Вариант E — Топ репозитории</span>
+      <h2>Featured Repositories</h2>
+
+      <div class="repos-grid" id="repos-grid">
+        <!-- Заполняется через JS -->
+        <div class="loading-placeholder">
+          <i class="fas fa-spinner fa-spin"></i>
+          Загрузка репозиториев...
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ СЕКЦИЯ 6: Open Source Contributions ============ -->
+    <div class="card">
+      <span class="option-label">Вариант F — Open Source Contributions</span>
+      <h2>Open Source Contributions</h2>
+
+      <p style="color: #94a3b8; margin-bottom: 20px;">
+        Когда начнёшь контрибутить в open source, здесь можно показать:
+      </p>
+
+      <div class="repos-grid">
+        <div class="repo-card">
+          <div class="repo-name">
+            <i class="fab fa-github"></i>
+            facebook/react
+          </div>
+          <div class="repo-desc">
+            Пример: Исправил баг в документации, добавил тесты
+          </div>
+          <div class="repo-stats">
+            <span><i class="fas fa-code-pull-request"></i> 3 PRs merged</span>
+            <span><i class="fas fa-check-circle" style="color: #22c55e;"></i> Contributor</span>
+          </div>
+        </div>
+
+        <div class="repo-card">
+          <div class="repo-name">
+            <i class="fab fa-github"></i>
+            flutter/flutter
+          </div>
+          <div class="repo-desc">
+            Пример: Улучшил производительность виджета
+          </div>
+          <div class="repo-stats">
+            <span><i class="fas fa-code-pull-request"></i> 1 PR merged</span>
+            <span><i class="fas fa-check-circle" style="color: #22c55e;"></i> Contributor</span>
+          </div>
+        </div>
+
+        <div class="repo-card" style="border-style: dashed; opacity: 0.6;">
+          <div class="repo-name">
+            <i class="fas fa-plus-circle"></i>
+            Твой будущий вклад
+          </div>
+          <div class="repo-desc">
+            Начни контрибутить и добавляй сюда свои достижения!
+          </div>
+          <div class="repo-stats">
+            <span><i class="fas fa-rocket"></i> Coming soon...</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px; padding: 20px; background: rgba(37, 99, 235, 0.1); border-radius: 12px; border-left: 4px solid #2563eb;">
+        <h4 style="color: #60a5fa; margin-bottom: 10px;"><i class="fas fa-lightbulb"></i> Совет</h4>
+        <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+          Для отслеживания contributions можно использовать:
+          <br>• <strong>GitHub Profile</strong> — показывает в каких репо ты контрибутил
+          <br>• <strong>Ручной список</strong> — добавляй свои PRs с описанием
+          <br>• <strong>ossinsight.io</strong> — аналитика open source вклада
+        </p>
+      </div>
+    </div>
+
+    <!-- ============ Комбинированный вариант ============ -->
+    <div class="card" style="border-color: #fcd34d;">
+      <span class="option-label" style="background: linear-gradient(135deg, #fcd34d, #f59e0b);">Рекомендую — Комбо</span>
+      <h2>GitHub Activity</h2>
+
+      <p style="color: #94a3b8; margin-bottom: 25px;">
+        Комбинация: Мини-статистика + Streak + Top Repos
+      </p>
+
+      <!-- Mini stats -->
+      <div class="github-mini-stats">
+        <div class="mini-stat">
+          <i class="fas fa-book"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value">12</span>
+            <span class="mini-stat-label">Repositories</span>
+          </div>
+        </div>
+        <div class="mini-stat">
+          <i class="fas fa-star"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value">24</span>
+            <span class="mini-stat-label">Total Stars</span>
+          </div>
+        </div>
+        <div class="mini-stat">
+          <i class="fas fa-code-commit"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value">156</span>
+            <span class="mini-stat-label">Contributions</span>
+          </div>
+        </div>
+        <a href="https://github.com/TheSeydiCharyyev" target="_blank" class="mini-stat" style="text-decoration: none; cursor: pointer;">
+          <i class="fab fa-github"></i>
+          <div class="mini-stat-info">
+            <span class="mini-stat-value" style="font-size: 1rem;">View Profile</span>
+            <span class="mini-stat-label">github.com</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Streak -->
+      <div style="text-align: center; margin: 30px 0;">
+        <img src="https://github-readme-streak-stats.herokuapp.com/?user=TheSeydiCharyyev&theme=tokyonight&hide_border=true&background=1e293b&ring=fcd34d&fire=fcd34d&currStreakLabel=fcd34d" alt="GitHub Streak" style="max-width: 100%; border-radius: 8px;" />
+      </div>
+
+      <!-- Top repos preview -->
+      <h3 style="color: #fde68a; margin-bottom: 15px; font-size: 1.1rem;">
+        <i class="fas fa-folder-open"></i> Featured Projects
+      </h3>
+      <div class="repos-grid" id="featured-repos">
+        <!-- Will be populated by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Fetch GitHub data
+    async function fetchGitHubData() {
+      try {
+        // User data
+        const userRes = await fetch('https://api.github.com/users/TheSeydiCharyyev');
+        const user = await userRes.json();
+
+        document.getElementById('repos-count').textContent = user.public_repos || 0;
+        document.getElementById('followers-count').textContent = user.followers || 0;
+
+        // Repos data
+        const reposRes = await fetch('https://api.github.com/users/TheSeydiCharyyev/repos?sort=updated&per_page=100');
+        const repos = await reposRes.json();
+
+        if (Array.isArray(repos)) {
+          // Calculate totals
+          let totalStars = 0;
+          let totalForks = 0;
+
+          repos.forEach(repo => {
+            totalStars += repo.stargazers_count || 0;
+            totalForks += repo.forks_count || 0;
+          });
+
+          document.getElementById('stars-count').textContent = totalStars;
+          document.getElementById('forks-count').textContent = totalForks;
+
+          // Display top repos
+          displayRepos(repos.slice(0, 4), 'repos-grid');
+          displayRepos(repos.slice(0, 3), 'featured-repos');
+        }
+      } catch (error) {
+        console.error('Error fetching GitHub data:', error);
+      }
+    }
+
+    function displayRepos(repos, containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const langColors = {
+        'Python': '#3572A5',
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#2b7489',
+        'Dart': '#00B4AB',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'C++': '#f34b7d',
+        'Java': '#b07219'
+      };
+
+      container.innerHTML = repos.map(repo => `
+        <a href="${repo.html_url}" target="_blank" class="repo-card" style="text-decoration: none;">
+          <div class="repo-name">
+            <i class="fas fa-book"></i>
+            ${repo.name}
+          </div>
+          <div class="repo-desc">
+            ${repo.description || 'No description'}
+          </div>
+          <div class="repo-stats">
+            ${repo.language ? `
+              <span class="repo-lang">
+                <span class="lang-dot" style="background: ${langColors[repo.language] || '#64748b'}"></span>
+                ${repo.language}
+              </span>
+            ` : ''}
+            <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+            <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // Load data on page load
+    fetchGitHubData();
+  </script>
+</body>
+</html>

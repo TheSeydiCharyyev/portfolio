@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Backend Development - Seydi Charyyev</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>SC</text></svg>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="cert-page.css" />
+  </head>
+  <body>
+    <nav class="cert-nav">
+      <div class="cert-nav-container">
+        <a href="../index.html#certifications" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+        <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div class="cert-page-container">
+      <header class="cert-page-header">
+        <div class="cert-page-icon">
+          <i class="fas fa-server"></i>
+        </div>
+        <h1>Backend Development</h1>
+        <p class="cert-page-subtitle">SUBBackend Development</p>
+      </header>
+
+      <main class="cert-page-content">
+        <section class="cert-section">
+          <h2><i class="fas fa-clock"></i> Coming Soon</h2>
+          <div class="cert-list">
+            <div class="cert-item">
+              <div class="cert-item-header">
+                <div class="cert-item-info">
+                  <h3>This page is being prepared</h3>
+                  <p class="cert-issuer">Full certificate list will be available soon</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="cert-page-footer">
+        <a href="https://www.linkedin.com/in/seydi-charyyev/details/certifications/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i> View all certificates on LinkedIn
+        </a>
+      </footer>
+    </div>
+
+    <script>
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark);
+        darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      });
+    </script>
+  </body>
+</html>

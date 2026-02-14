@@ -3268,3 +3268,52 @@ body.dark-mode .github-info-box p {
     padding: 15px;
   }
 }
+
+/* ==================== COLLAPSIBLE SECTIONS ==================== */
+.collapsible h2 {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.collapsible h2::before {
+  content: none;
+}
+
+.collapsible h2 .collapse-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 15px;
+  opacity: 0.6;
+}
+
+.collapsible:not(.collapsed) h2 .collapse-icon {
+  transform: rotate(180deg);
+}
+
+.collapsible > *:not(h2) {
+  overflow: hidden;
+  max-height: 5000px;
+  opacity: 1;
+  transition: max-height 0.5s ease, opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+}
+
+.collapsible.collapsed > *:not(h2) {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.collapsible.collapsed h2 {
+  margin-bottom: 0;
+}
+
+.collapsible.collapsed h2::after {
+  bottom: -4px;
+}

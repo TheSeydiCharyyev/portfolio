@@ -629,6 +629,23 @@ function renderGitHubRepos(repos, containerId) {
   `).join('');
 }
 
+// Collapsible sections
+function initCollapsibleSections() {
+  document.querySelectorAll('.collapsible').forEach(function(section) {
+    var h2 = section.querySelector('h2');
+    if (!h2) return;
+
+    // Add chevron icon
+    var icon = document.createElement('i');
+    icon.className = 'fas fa-chevron-down collapse-icon';
+    h2.appendChild(icon);
+
+    h2.addEventListener('click', function() {
+      section.classList.toggle('collapsed');
+    });
+  });
+}
+
 // Initialize everything on DOM ready
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize particles background
@@ -639,6 +656,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollToTop();
   initNavigation();
   initMobileNav();
+  initCollapsibleSections();
 
   // Initialize GitHub stats
   initGitHubStats();

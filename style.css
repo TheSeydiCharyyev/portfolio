@@ -149,33 +149,32 @@ h1 {
 
 /* ==================== SECTIONS BENTO GRID ==================== */
 .sections-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 25px;
+  padding: 0;
   margin-bottom: 50px;
 }
 
-/* Collapsed card styling */
+/* Collapsed accordion item */
 .sections-grid > .collapsible.collapsed {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #94a3b8;
-  padding: 28px 24px;
-  border-radius: 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  border-left: none;
+  border-radius: 0;
+  padding: 22px 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  grid-column: span 1;
+  transition: all 0.2s ease;
+  box-shadow: none;
   min-height: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .sections-grid > .collapsible.collapsed:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  border-color: #cbd5e1;
+  background: rgba(0, 0, 0, 0.02);
+  transform: none;
+  box-shadow: none;
 }
 
 .sections-grid > .collapsible.collapsed h2 {

@@ -1,422 +1,3 @@
-// TechParticlesEngine - Animated Background
-class TechParticlesEngine {
-  constructor() {
-    this.canvas = document.getElementById("particles-canvas");
-    this.ctx = this.canvas.getContext("2d");
-    this.particles = [];
-    this.svgImages = {};
-    this.loadedImages = 0;
-    this.totalImages = 0;
-
-    this.config = {
-      particleCount: 60,
-      minParticles: 40,
-      maxParticles: 70,
-      animationSpeed: 0.8,
-      mouseRepulsion: 80,
-      showConnections: false,
-      enableRotation: true,
-      enableCollisions: true,
-      collisionDistance: 25,
-      particleSize: { min: 25, max: 45 },
-    };
-
-    this.explosionParticles = [];
-    this.mouse = { x: 0, y: 0 };
-    this.usedTechHistory = [];
-    this.maxHistorySize = 4;
-
-    this.techData = [
-      { name: "Anaconda", file: "anaconda-original.svg", color: "#44A833", category: "tools" },
-      { name: "Android", file: "android-original.svg", color: "#3DDC84", category: "mobile" },
-      { name: "Android Studio", file: "androidstudio-original.svg", color: "#3DDC84", category: "tools" },
-      { name: "AngularJS", file: "angularjs-original.svg", color: "#E23237", category: "frontend" },
-      { name: "Angular", file: "angular-original.svg", color: "#DD0031", category: "frontend" },
-      { name: "Apache Kafka", file: "apachekafka-original-wordmark.svg", color: "#231F20", category: "backend" },
-      { name: "Apache", file: "apache-original.svg", color: "#D22128", category: "backend" },
-      { name: "Apple", file: "apple-original.svg", color: "#000000", category: "tools" },
-      { name: "Azure DevOps", file: "azuredevops-original.svg", color: "#0078D4", category: "tools" },
-      { name: "Azure", file: "azure-original.svg", color: "#0078D4", category: "cloud" },
-      { name: "Bash", file: "bash-original.svg", color: "#4EAA25", category: "tools" },
-      { name: "Behance", file: "behance-original.svg", color: "#1769FF", category: "design" },
-      { name: "BitBucket", file: "bitbucket-original.svg", color: "#0052CC", category: "tools" },
-      { name: "Blazor", file: "blazor-original.svg", color: "#512BD4", category: "frontend" },
-      { name: "Bootstrap", file: "bootstrap-original.svg", color: "#7952B3", category: "frontend" },
-      { name: "Chrome", file: "chrome-original.svg", color: "#4285F4", category: "tools" },
-      { name: "Cloudflare", file: "cloudflare-original.svg", color: "#F38020", category: "cloud" },
-      { name: "COBOL", file: "cobol-original.svg", color: "#005BBB", category: "languages" },
-      { name: "Composer", file: "composer-original.svg", color: "#885630", category: "tools" },
-      { name: "C", file: "c-original.svg", color: "#00599C", category: "languages" },
-      { name: "C++", file: "cplusplus-original.svg", color: "#00599C", category: "languages" },
-      { name: "C#", file: "csharp-original.svg", color: "#239120", category: "languages" },
-      { name: "CSS3", file: "css3-original.svg", color: "#1572B6", category: "frontend" },
-      { name: "Dart", file: "dart-original.svg", color: "#0175C2", category: "languages" },
-      { name: "Delphi", file: "delphi-original.svg", color: "#EE1F35", category: "languages" },
-      { name: "Django", file: "django-plain.svg", color: "#092E20", category: "backend" },
-      { name: "Django REST", file: "djangorest-original.svg", color: "#092E20", category: "backend" },
-      { name: "Docker", file: "docker-original.svg", color: "#2496ED", category: "tools" },
-      { name: ".NET", file: "dot-net-original.svg", color: "#512BD4", category: "backend" },
-      { name: "Eclipse", file: "eclipse-original.svg", color: "#2C2255", category: "tools" },
-      { name: "Express", file: "express-original.svg", color: "#000000", category: "backend" },
-      { name: "FastAPI", file: "fastapi-original.svg", color: "#009688", category: "backend" },
-      { name: "Figma", file: "figma-original.svg", color: "#F24E1E", category: "design" },
-      { name: "Firebase", file: "firebase-original.svg", color: "#FFCA28", category: "cloud" },
-      { name: "Firefox", file: "firefox-original.svg", color: "#FF7139", category: "tools" },
-      { name: "Flask", file: "flask-original.svg", color: "#000000", category: "backend" },
-      { name: "Flutter", file: "flutter-original.svg", color: "#02569B", category: "mobile" },
-      { name: "Fortran", file: "fortran-original.svg", color: "#734F96", category: "languages" },
-      { name: "GitHub", file: "github-original.svg", color: "#181717", category: "tools" },
-      { name: "GitLab", file: "gitlab-original.svg", color: "#FC6D26", category: "tools" },
-      { name: "Git", file: "git-original.svg", color: "#F05032", category: "tools" },
-      { name: "Google", file: "google-original.svg", color: "#4285F4", category: "tools" },
-      { name: "Go", file: "go-original.svg", color: "#00ADD8", category: "languages" },
-      { name: "Gradle", file: "gradle-original.svg", color: "#02303A", category: "tools" },
-      { name: "Haskell", file: "haskell-original.svg", color: "#5D4F85", category: "languages" },
-      { name: "HTML5", file: "html5-original.svg", color: "#E34F26", category: "frontend" },
-      { name: "HTMX", file: "htmx-original.svg", color: "#3366CC", category: "frontend" },
-      { name: "Java", file: "java-original.svg", color: "#ED8B00", category: "languages" },
-      { name: "JavaScript", file: "javascript-original.svg", color: "#F7DF1E", category: "languages" },
-      { name: "Jenkins", file: "jenkins-original.svg", color: "#D24939", category: "tools" },
-      { name: "JetBrains", file: "jetbrains-original.svg", color: "#000000", category: "tools" },
-      { name: "Jetpack Compose", file: "jetpackcompose-original.svg", color: "#4285F4", category: "mobile" },
-      { name: "Jira", file: "jira-original.svg", color: "#0052CC", category: "tools" },
-      { name: "Kubernetes", file: "kubernetes-original.svg", color: "#326CE5", category: "tools" },
-      { name: "Laravel", file: "laravel-original.svg", color: "#FF2D20", category: "backend" },
-      { name: "Lua", file: "lua-original.svg", color: "#2C2D72", category: "languages" },
-      { name: "MongoDB", file: "mongodb-original.svg", color: "#47A248", category: "database" },
-      { name: "Mongoose", file: "mongoose-original.svg", color: "#880000", category: "database" },
-      { name: "MySQL", file: "mysql-original.svg", color: "#4479A1", category: "database" },
-      { name: "Node.js", file: "nodejs-original.svg", color: "#339933", category: "backend" },
-      { name: "Nuxt.js", file: "nuxtjs-original.svg", color: "#00DC82", category: "frontend" },
-      { name: "Objective-C", file: "objectivec-plain.svg", color: "#438EFF", category: "languages" },
-      { name: "Oracle", file: "oracle-original.svg", color: "#F80000", category: "database" },
-      { name: "PostgreSQL", file: "postgresql-original.svg", color: "#336791", category: "database" },
-      { name: "Postman", file: "postman-original.svg", color: "#FF6C37", category: "tools" },
-      { name: "PowerShell", file: "powershell-original.svg", color: "#5391FE", category: "tools" },
-      { name: "Python", file: "python-original.svg", color: "#3776AB", category: "languages" },
-      { name: "R Studio", file: "radstudio-original.svg", color: "#ED1F35", category: "tools" },
-      { name: "Rails", file: "rails-original-wordmark.svg", color: "#CC0000", category: "backend" },
-      { name: "React Native", file: "reactnative-original.svg", color: "#61DAFB", category: "mobile" },
-      { name: "React", file: "react-original.svg", color: "#61DAFB", category: "frontend" },
-      { name: "Redux", file: "redux-original.svg", color: "#764ABC", category: "frontend" },
-      { name: "Ruby", file: "ruby-original.svg", color: "#CC342D", category: "languages" },
-      { name: "Rust", file: "rust-original.svg", color: "#000000", category: "languages" },
-      { name: "Safari", file: "safari-original.svg", color: "#006CFF", category: "tools" },
-      { name: "Spring", file: "spring-original.svg", color: "#6DB33F", category: "backend" },
-      { name: "SQLAlchemy", file: "sqlalchemy-original.svg", color: "#D71F00", category: "database" },
-      { name: "SQLite", file: "sqlite-original.svg", color: "#003B57", category: "database" },
-      { name: "Stack Overflow", file: "stackoverflow-original.svg", color: "#F58025", category: "tools" },
-      { name: "Tailwind CSS", file: "tailwindcss-original.svg", color: "#06B6D4", category: "frontend" },
-      { name: "Three.js", file: "threejs-original.svg", color: "#000000", category: "frontend" },
-      { name: "Vue.js", file: "vuejs-original.svg", color: "#4FC08D", category: "frontend" },
-      { name: "YAML", file: "yaml-original.svg", color: "#CB171E", category: "tools" },
-      { name: "Zustand", file: "zustand-original.svg", color: "#FF6B35", category: "frontend" },
-    ];
-
-    this.init();
-  }
-
-  async init() {
-    this.setupCanvas();
-    this.setupEventListeners();
-    await this.loadImages();
-    this.createParticles();
-    this.startAnimation();
-  }
-
-  setupCanvas() {
-    this.resizeCanvas();
-    window.addEventListener("resize", () => this.resizeCanvas());
-  }
-
-  resizeCanvas() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-  }
-
-  setupEventListeners() {
-    document.addEventListener("mousemove", (e) => {
-      this.mouse.x = e.clientX;
-      this.mouse.y = e.clientY;
-    });
-
-    document.addEventListener("touchmove", (e) => {
-      if (e.touches[0]) {
-        this.mouse.x = e.touches[0].clientX;
-        this.mouse.y = e.touches[0].clientY;
-      }
-    });
-  }
-
-  async loadImages() {
-    this.totalImages = this.techData.length;
-    const promises = this.techData.map((tech) => this.loadImage(tech));
-    await Promise.allSettled(promises);
-  }
-
-  loadImage(tech) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        this.svgImages[tech.file] = img;
-        this.loadedImages++;
-        resolve();
-      };
-      img.onerror = () => {
-        this.loadedImages++;
-        resolve();
-      };
-      img.src = `assets/icons/${tech.file}`;
-    });
-  }
-
-  getSmartRandomTech() {
-    const availableTech = this.techData.filter(
-      (tech) => !this.usedTechHistory.includes(tech.name)
-    );
-
-    if (availableTech.length < 5) {
-      this.usedTechHistory = this.usedTechHistory.slice(-2);
-      return this.getSmartRandomTech();
-    }
-
-    const randomTech = availableTech[Math.floor(Math.random() * availableTech.length)];
-    this.usedTechHistory.push(randomTech.name);
-
-    if (this.usedTechHistory.length > this.maxHistorySize) {
-      this.usedTechHistory.shift();
-    }
-
-    return randomTech;
-  }
-
-  createParticles() {
-    this.particles = [];
-    for (let i = 0; i < this.config.particleCount; i++) {
-      this.particles.push(this.createParticle());
-    }
-  }
-
-  createParticle() {
-    const tech = this.getSmartRandomTech();
-    const size =
-      Math.random() * (this.config.particleSize.max - this.config.particleSize.min) +
-      this.config.particleSize.min;
-
-    return {
-      x: Math.random() * this.canvas.width,
-      y: Math.random() * this.canvas.height,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      tech: tech,
-      size: size,
-      rotation: Math.random() * Math.PI * 2,
-      rotationSpeed: (Math.random() - 0.5) * 0.02,
-      opacity: Math.random() * 0.25 + 0.7,
-      pulse: Math.random() * Math.PI * 2,
-      pulseSpeed: Math.random() * 0.02 + 0.01,
-    };
-  }
-
-  updateParticles() {
-    const speedMultiplier = this.config.animationSpeed;
-
-    if (this.config.enableCollisions) {
-      this.checkCollisions();
-    }
-
-    this.particles.forEach((particle) => {
-      particle.x += particle.vx * speedMultiplier;
-      particle.y += particle.vy * speedMultiplier;
-
-      if (this.config.enableRotation) {
-        particle.rotation += particle.rotationSpeed * speedMultiplier;
-      }
-
-      particle.pulse += particle.pulseSpeed * speedMultiplier;
-
-      const dx = this.mouse.x - particle.x;
-      const dy = this.mouse.y - particle.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < this.config.mouseRepulsion) {
-        const force = (this.config.mouseRepulsion - distance) / this.config.mouseRepulsion;
-        const angle = Math.atan2(dy, dx);
-        particle.vx -= Math.cos(angle) * force * 0.3 * speedMultiplier;
-        particle.vy -= Math.sin(angle) * force * 0.3 * speedMultiplier;
-      }
-
-      if (particle.x <= 0 || particle.x >= this.canvas.width) {
-        particle.vx *= -0.9;
-        particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
-      }
-
-      if (particle.y <= 0 || particle.y >= this.canvas.height) {
-        particle.vy *= -0.9;
-        particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
-      }
-
-      particle.vx *= 0.998;
-      particle.vy *= 0.998;
-
-      const currentSpeed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
-      const minSpeed = 0.2;
-
-      if (currentSpeed < minSpeed && currentSpeed > 0.01) {
-        const angle = Math.random() * Math.PI * 2;
-        const impulse = minSpeed * 0.3;
-        particle.vx += Math.cos(angle) * impulse;
-        particle.vy += Math.sin(angle) * impulse;
-      }
-
-      if (Math.random() < 0.01) {
-        particle.vx += (Math.random() - 0.5) * 0.05;
-        particle.vy += (Math.random() - 0.5) * 0.05;
-      }
-    });
-
-    this.updateExplosionParticles();
-    this.replenishParticles();
-  }
-
-  checkCollisions() {
-    for (let i = this.particles.length - 1; i >= 0; i--) {
-      for (let j = i - 1; j >= 0; j--) {
-        const particle1 = this.particles[i];
-        const particle2 = this.particles[j];
-
-        const dx = particle1.x - particle2.x;
-        const dy = particle1.y - particle2.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < this.config.collisionDistance) {
-          this.createExplosion(
-            (particle1.x + particle2.x) / 2,
-            (particle1.y + particle2.y) / 2
-          );
-
-          this.particles.splice(i, 1);
-          if (j < i) {
-            this.particles.splice(j, 1);
-            i--;
-          }
-          break;
-        }
-      }
-    }
-  }
-
-  createExplosion(x, y) {
-    const colors = ["#2563eb", "#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe"];
-
-    for (let i = 0; i < 12; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 4 + 2;
-      this.explosionParticles.push({
-        x: x,
-        y: y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 30,
-        maxLife: 30,
-        size: Math.random() * 3 + 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        type: "circle",
-      });
-    }
-  }
-
-  updateExplosionParticles() {
-    for (let i = this.explosionParticles.length - 1; i >= 0; i--) {
-      const particle = this.explosionParticles[i];
-
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-      particle.vx *= 0.95;
-      particle.vy *= 0.95;
-      particle.life--;
-
-      if (particle.life <= 0) {
-        this.explosionParticles.splice(i, 1);
-      }
-    }
-  }
-
-  replenishParticles() {
-    if (this.particles.length < this.config.minParticles) {
-      const needed = this.config.minParticles - this.particles.length;
-      for (let i = 0; i < needed; i++) {
-        setTimeout(() => {
-          if (this.particles.length < this.config.maxParticles) {
-            this.particles.push(this.createParticle());
-          }
-        }, i * 500);
-      }
-    }
-  }
-
-  drawParticles() {
-    this.particles.forEach((particle) => {
-      this.ctx.save();
-      this.ctx.translate(particle.x, particle.y);
-      this.ctx.rotate(particle.rotation);
-
-      const pulseScale = 1 + Math.sin(particle.pulse) * 0.05;
-      this.ctx.scale(pulseScale, pulseScale);
-
-      this.ctx.globalAlpha = particle.opacity;
-
-      const halfSize = particle.size / 2;
-
-      if (this.svgImages[particle.tech.file]) {
-        this.ctx.drawImage(
-          this.svgImages[particle.tech.file],
-          -halfSize,
-          -halfSize,
-          particle.size,
-          particle.size
-        );
-      } else {
-        const gradient = this.ctx.createRadialGradient(0, 0, 0, 0, 0, halfSize);
-        gradient.addColorStop(0, particle.tech.color);
-        gradient.addColorStop(0.7, particle.tech.color + "66");
-        gradient.addColorStop(1, particle.tech.color + "00");
-
-        this.ctx.fillStyle = gradient;
-        this.ctx.beginPath();
-        this.ctx.arc(0, 0, halfSize, 0, Math.PI * 2);
-        this.ctx.fill();
-      }
-
-      this.ctx.restore();
-    });
-
-    this.explosionParticles.forEach((particle) => {
-      this.ctx.save();
-      this.ctx.globalAlpha = particle.life / particle.maxLife;
-      this.ctx.fillStyle = particle.color;
-      this.ctx.beginPath();
-      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      this.ctx.fill();
-      this.ctx.restore();
-    });
-  }
-
-  render() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawParticles();
-  }
-
-  startAnimation() {
-    const animate = () => {
-      this.updateParticles();
-      this.render();
-      requestAnimationFrame(animate);
-    };
-    animate();
-  }
-}
-
 // Dark Mode Toggle
 function initDarkMode() {
   const darkModeToggle = document.getElementById("dark-mode-toggle");
@@ -629,28 +210,95 @@ function renderGitHubRepos(repos, containerId) {
   `).join('');
 }
 
-// Collapsible sections
+// Collapsible sections with bento grid icons & accordion
 function initCollapsibleSections() {
+  var sectionConfig = {
+    about:          { icon: 'fas fa-user',            subtitle: 'My story beyond the code' },
+    experience:     { icon: 'fas fa-briefcase',       subtitle: 'Career chapters & milestones' },
+    skills:         { icon: 'fas fa-code',            subtitle: 'Technologies & frameworks' },
+    projects:       { icon: 'fas fa-folder-open',     subtitle: 'Shipped & in progress' },
+    github:         { icon: 'fab fa-github',          subtitle: 'Stats, repos & contributions' },
+    profiles:       { icon: 'fas fa-globe',           subtitle: 'Platforms & communities' },
+    languages:      { icon: 'fas fa-language',        subtitle: 'Human languages I speak' },
+    certifications: { icon: 'fas fa-certificate',     subtitle: '200+ certificates & counting' },
+    education:      { icon: 'fas fa-graduation-cap',  subtitle: 'Where the journey began' },
+    contact:        { icon: 'fas fa-envelope',        subtitle: "Let's connect" }
+  };
+
   document.querySelectorAll('.collapsible').forEach(function(section) {
     var h2 = section.querySelector('h2');
     if (!h2) return;
 
-    // Add chevron icon
-    var icon = document.createElement('i');
-    icon.className = 'fas fa-chevron-down collapse-icon';
-    h2.appendChild(icon);
+    var sectionId = section.id;
+    var config = sectionConfig[sectionId];
 
+    // Get original heading text
+    var headingText = h2.textContent.trim();
+
+    // Rebuild h2 internals
+    h2.innerHTML = '';
+
+    // Create heading content wrapper
+    var headingContent = document.createElement('span');
+    headingContent.className = 'heading-content';
+
+    // Create icon circle if config exists
+    if (config) {
+      var iconCircle = document.createElement('span');
+      iconCircle.className = 'section-icon-circle';
+      var iconEl = document.createElement('i');
+      iconEl.className = config.icon;
+      iconCircle.appendChild(iconEl);
+      headingContent.appendChild(iconCircle);
+    }
+
+    // Create text wrapper
+    var textWrapper = document.createElement('span');
+    textWrapper.className = 'heading-text';
+
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = headingText;
+    textWrapper.appendChild(titleSpan);
+
+    // Add subtitle
+    if (config) {
+      var subtitleSpan = document.createElement('span');
+      subtitleSpan.className = 'section-subtitle';
+      subtitleSpan.textContent = config.subtitle;
+      textWrapper.appendChild(subtitleSpan);
+    }
+
+    headingContent.appendChild(textWrapper);
+    h2.appendChild(headingContent);
+
+    // Add chevron icon
+    var chevron = document.createElement('i');
+    chevron.className = 'fas fa-chevron-down collapse-icon';
+    h2.appendChild(chevron);
+
+    // Click handler with accordion behavior
     h2.addEventListener('click', function() {
-      section.classList.toggle('collapsed');
+      var isCollapsed = section.classList.contains('collapsed');
+
+      if (isCollapsed) {
+        // Accordion: collapse all other sections first
+        document.querySelectorAll('.sections-grid .collapsible:not(.collapsed)').forEach(function(other) {
+          if (other !== section) {
+            other.classList.add('collapsed');
+          }
+        });
+        // Expand this one
+        section.classList.remove('collapsed');
+      } else {
+        // Collapse this section
+        section.classList.add('collapsed');
+      }
     });
   });
 }
 
 // Initialize everything on DOM ready
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize particles background
-  new TechParticlesEngine();
-
   // Initialize UI features
   initDarkMode();
   initScrollToTop();
@@ -675,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }, observerOptions);
 
-  document.querySelectorAll(".card, .cta-section").forEach((el) => {
+  document.querySelectorAll(".card, .cta-section, .sections-grid .collapsible").forEach((el) => {
     observer.observe(el);
   });
 
@@ -683,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".skill-tag").forEach((tag) => {
     tag.addEventListener("mouseenter", function () {
       this.style.transform = "scale(1.05) translateY(-1px)";
-      this.style.boxShadow = "0 8px 20px rgba(37, 99, 235, 0.3)";
+      this.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
     });
 
     tag.addEventListener("mouseleave", function () {

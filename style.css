@@ -13,7 +13,7 @@ body {
     sans-serif;
   line-height: 1.6;
   color: #1a1a1a;
-  background: #ffffff;
+  background: #f8fafc;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
@@ -21,16 +21,6 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Particles Canvas Background */
-#particles-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-}
 
 .container {
   max-width: 1400px;
@@ -42,7 +32,7 @@ body {
 
 header {
   text-align: center;
-  color: #2563eb;
+  color: #1a1a1a;
   padding: 80px 0;
   margin-bottom: 50px;
 }
@@ -51,7 +41,7 @@ header {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #2563eb, #1d4ed8);
+  background: #f1f5f9;
   margin: 0 auto 40px;
   display: flex;
   align-items: center;
@@ -59,7 +49,7 @@ header {
   font-size: 56px;
   font-weight: 600;
   color: white;
-  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease;
 }
 
@@ -115,22 +105,21 @@ h1 {
   display: flex;
   align-items: center;
   gap: 15px;
-  color: #2563eb;
+  color: #475569;
   text-decoration: none;
   transition: all 0.3s ease;
   font-size: 1.1rem;
   font-weight: 500;
   padding: 15px 20px;
   border-radius: 12px;
-  background: rgba(37, 99, 235, 0.05);
-  border: 1px solid rgba(37, 99, 235, 0.1);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
 }
 
 .contact-item:hover {
   transform: translateY(-2px);
-  background: rgba(37, 99, 235, 0.1);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
-  color: #1d4ed8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
 }
 
 .contact-item i {
@@ -146,73 +135,172 @@ h1 {
 }
 
 /* Contact item brand colors */
-.contact-item.email {
-  color: #EA4335;
-  background: rgba(234, 67, 53, 0.08);
-  border-color: rgba(234, 67, 53, 0.2);
-}
+.contact-item.email { color: #64748b; }
+.contact-item.email:hover { color: #EA4335; }
 
-.contact-item.email:hover {
-  background: rgba(234, 67, 53, 0.15);
-  box-shadow: 0 8px 25px rgba(234, 67, 53, 0.2);
-  color: #DC2626;
-}
+.contact-item.github { color: #64748b; }
+.contact-item.github:hover { color: #1a1a1a; }
 
-.contact-item.github {
-  color: #333;
-  background: rgba(51, 51, 51, 0.08);
-  border-color: rgba(51, 51, 51, 0.2);
-}
+.contact-item.linkedin { color: #64748b; }
+.contact-item.linkedin:hover { color: #0A66C2; }
 
-.contact-item.github:hover {
-  background: rgba(51, 51, 51, 0.15);
-  box-shadow: 0 8px 25px rgba(51, 51, 51, 0.2);
-  color: #000;
-}
+.contact-item.cv { color: #64748b; }
+.contact-item.cv:hover { color: #dc2626; }
 
-.contact-item.linkedin {
-  color: #0A66C2;
-  background: rgba(10, 102, 194, 0.08);
-  border-color: rgba(10, 102, 194, 0.2);
-}
-
-.contact-item.linkedin:hover {
-  background: rgba(10, 102, 194, 0.15);
-  box-shadow: 0 8px 25px rgba(10, 102, 194, 0.2);
-  color: #004182;
-}
-
-.contact-item.cv {
-  color: #dc2626;
-  background: rgba(220, 38, 38, 0.08);
-  border-color: rgba(220, 38, 38, 0.2);
-}
-
-.contact-item.cv:hover {
-  background: rgba(220, 38, 38, 0.15);
-  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.2);
-  color: #b91c1c;
-}
-
-.main-content {
+/* ==================== SECTIONS BENTO GRID ==================== */
+.sections-grid {
   display: grid;
-  gap: 50px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 25px;
   margin-bottom: 50px;
 }
 
+/* Collapsed card styling */
+.sections-grid > .collapsible.collapsed {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #94a3b8;
+  padding: 28px 24px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  grid-column: span 1;
+  min-height: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.sections-grid > .collapsible.collapsed:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.sections-grid > .collapsible.collapsed h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+.sections-grid > .collapsible.collapsed h2::after {
+  display: none;
+}
+
+/* Expanded section - full width */
+.sections-grid > .collapsible:not(.collapsed) {
+  grid-column: 1 / -1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Section icon */
+.section-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 14px;
+  transition: all 0.3s ease;
+  background: none;
+}
+
+.section-icon-circle i {
+  font-size: 1.15rem;
+  color: #94a3b8;
+  filter: none;
+}
+
+.collapsible.collapsed:hover .section-icon-circle i {
+  color: #1e293b;
+}
+
+/* Subtitle text */
+.section-subtitle {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #64748b;
+  margin-top: 2px;
+  letter-spacing: 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.collapsible.collapsed .section-subtitle {
+  opacity: 1;
+  max-height: 30px;
+}
+
+/* Hide icon circle when expanded */
+.collapsible:not(.collapsed) .section-icon-circle {
+  display: none;
+}
+
+.collapsible:not(.collapsed) .section-subtitle {
+  display: none;
+}
+
+/* Heading layout with icon */
+.collapsible h2 .heading-content {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.collapsible h2 .heading-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ==================== SECTION ACCENT COLORS ==================== */
+.sections-grid > .collapsible.collapsed:hover {
+  border-left-color: #1e293b;
+}
+
+/* ==================== DARK MODE - BENTO GRID ==================== */
+body.dark-mode .sections-grid > .collapsible.collapsed {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .sections-grid > .collapsible.collapsed:hover {
+  background: #1e293b;
+  border-color: #475569;
+}
+
+body.dark-mode .section-subtitle {
+  color: #94a3b8;
+}
+
+body.dark-mode .section-icon-circle i {
+  color: #64748b;
+}
+
+body.dark-mode .collapsible.collapsed:hover .section-icon-circle i {
+  color: #e2e8f0;
+}
+
+body.dark-mode .sections-grid > .collapsible.collapsed h2 {
+  color: #f1f5f9;
+}
+
 .card {
-  background: #dbeafe;
+  background: #ffffff;
   border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
-  border: 1px solid rgba(147, 197, 253, 0.5);
+  border: 1px solid #e2e8f0;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-  background: #bfdbfe;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 h2 {
@@ -229,9 +317,9 @@ h2::after {
   position: absolute;
   bottom: -8px;
   left: 0;
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  width: 40px;
+  height: 2px;
+  background: #1e293b;
   border-radius: 2px;
 }
 
@@ -254,19 +342,16 @@ h2::after {
 }
 
 .framework-section {
-  background: rgba(248, 250, 252, 0.8);
-  backdrop-filter: blur(5px);
+  background: #f8fafc;
   padding: 30px;
   border-radius: 12px;
-  border: 1px solid rgba(226, 232, 240, 0.6);
+  border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
 }
 
 .framework-section:hover {
-  border-color: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.1);
-  background: rgba(248, 250, 252, 0.95);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .framework-section h4 {
@@ -275,6 +360,23 @@ h2::after {
   font-size: 1.125rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+.skill-group-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 20px 0 10px;
+}
+
+.skill-group-label:first-of-type {
+  margin-top: 0;
+}
+
+body.dark-mode .skill-group-label {
+  color: #94a3b8;
 }
 
 
@@ -361,9 +463,9 @@ h2::after {
   /* Let devicons use their native colors via the 'colored' class */
 }
 
-/* Font Awesome icons get blue color */
+/* Font Awesome icons get dark color */
 .skill-tag.icon-only i[class*="fa-"] {
-  color: #2563eb;
+  color: #475569;
 }
 
 .skill-tag.icon-only::after {
@@ -409,16 +511,13 @@ h2::after {
 
 .skill-tag:hover {
   transform: scale(1.05) translateY(-1px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .skill-tag.icon-only:hover {
-  transform: scale(1.1) translateY(-3px);
-  box-shadow:
-    0 12px 20px rgba(37, 99, 235, 0.25),
-    0 4px 8px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
-  border-color: rgba(37, 99, 235, 0.3);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
 }
 
 .skill-tag i {
@@ -690,8 +789,28 @@ h2::after {
   backdrop-filter: blur(10px);
   color: white;
   border-radius: 16px;
-  margin-top: 50px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Override collapsed card style for CTA */
+.sections-grid > .cta-section.collapsed {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #94a3b8;
+  color: inherit;
+}
+
+.sections-grid > .cta-section.collapsed h2 {
+  color: #1a1a1a;
+}
+
+body.dark-mode .sections-grid > .cta-section.collapsed {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(51, 65, 85, 0.5);
+}
+
+body.dark-mode .sections-grid > .cta-section.collapsed h2 {
+  color: #f1f5f9;
 }
 
 .cta-section:hover {
@@ -930,8 +1049,8 @@ h2::after {
     padding: 30px;
   }
 
-  .main-content {
-    gap: 30px;
+  .sections-grid {
+    gap: 16px;
   }
 
   .cta-section {
@@ -957,6 +1076,26 @@ h2::after {
 
 /* Small Tablets and Large Phones */
 @media (max-width: 768px) {
+  .sections-grid {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+
+  .sections-grid > .collapsible.collapsed h2 {
+    font-size: 1.1rem;
+  }
+
+  .section-icon-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    margin-right: 12px;
+  }
+
+  .section-icon-circle i {
+    font-size: 1rem;
+  }
+
   header {
     padding: 100px 0 50px;
     margin-bottom: 25px;
@@ -1007,10 +1146,6 @@ h2::after {
 
   .card:hover {
     transform: none;
-  }
-
-  .main-content {
-    gap: 20px;
   }
 
   .skills-grid {
@@ -1158,6 +1293,34 @@ h2::after {
 
 /* Small Phones */
 @media (max-width: 480px) {
+  .sections-grid {
+    padding: 0 12px;
+    gap: 12px;
+  }
+
+  .sections-grid > .collapsible.collapsed {
+    padding: 20px 18px;
+  }
+
+  .sections-grid > .collapsible.collapsed h2 {
+    font-size: 1rem;
+  }
+
+  .section-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+
+  .section-icon-circle i {
+    font-size: 0.85rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.7rem;
+  }
+
   header {
     padding: 90px 0 40px;
   }
@@ -1189,10 +1352,6 @@ h2::after {
   .card {
     padding: 20px;
     border-radius: 10px;
-  }
-
-  .main-content {
-    gap: 15px;
   }
 
   .contact-item {

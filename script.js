@@ -115,44 +115,24 @@ async function initGitHubStats() {
     const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
     const repos = await reposRes.json();
 
-    // Update mini stats for all variants
     if (user && !user.message) {
-      // Update Variant A elements
-      updateElement('gh-repos-a', user.public_repos || 0);
-      updateElement('gh-followers-a', user.followers || 0);
-
-      // Update Recommended Combo elements
       updateElement('gh-repos', user.public_repos || 0);
       updateElement('gh-followers', user.followers || 0);
     }
 
     if (Array.isArray(repos)) {
       let totalStars = 0;
-      let totalForks = 0;
-
       repos.forEach(repo => {
         totalStars += repo.stargazers_count || 0;
-        totalForks += repo.forks_count || 0;
       });
-
-      // Update Variant A elements
-      updateElement('gh-stars-a', totalStars);
-      updateElement('gh-forks-a', totalForks);
-
-      // Update Recommended Combo elements
       updateElement('gh-stars', totalStars);
 
-      // Render top repos
       const topRepos = repos
         .filter(r => !r.fork)
         .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
         .slice(0, 4);
 
-      // Render to Variant E (4 repos)
       renderGitHubRepos(topRepos, 'gh-repos-grid');
-
-      // Render to Recommended Combo (3 repos)
-      renderGitHubRepos(topRepos.slice(0, 3), 'gh-featured-repos');
     }
   } catch (error) {
     console.error('GitHub API Error:', error);

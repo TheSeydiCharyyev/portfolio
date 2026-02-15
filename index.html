@@ -87,45 +87,56 @@
       <div class="sections-grid">
         <section id="about" class="card fade-in collapsible collapsed" data-icon="fa-user-astronaut" data-subtitle="My story beyond the code">
           <h2>More Than Just Code</h2>
+          <div class="about-stats">
+            <div class="about-stat">
+              <span class="about-stat-value">3+</span>
+              <span class="about-stat-label">Years of Experience</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-value">200+</span>
+              <span class="about-stat-label">Certificates</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-value">6</span>
+              <span class="about-stat-label">Languages Spoken</span>
+            </div>
+            <div class="about-stat">
+              <span class="about-stat-value">2</span>
+              <span class="about-stat-label">App Store & Google Play</span>
+            </div>
+          </div>
           <p class="about-text">
-            Started with C++ and Delphi, now building the future with JavaScript, React and React Native.
-            Code is just a tool — the real magic happens when you solve problems that matter.
-            From a student in Turkmenistan to a mentor shaping the next generation of developers.
-            Every project I build, every lesson I teach — it's all part of one mission:
-            making technology accessible to everyone. From Mary, Turkmenistan — creating for the world.
+            Started with C++ and Delphi, now focused on JavaScript full stack and React Native.
+            From building responsive UIs to designing backend APIs to shipping mobile apps
+            to the App Store and Google Play — I cover the full product cycle.
+            Based in Turkmenistan, building for the world.
           </p>
         </section>
 
         <section id="experience" class="card fade-in collapsible collapsed" data-icon="fa-route" data-subtitle="Career chapters & milestones">
           <h2>The Path So Far</h2>
-          <p class="about-text" style="margin-bottom: 30px;">
-            From writing my first lines of code to teaching others how to write theirs — every step shaped who I am today.
-          </p>
-
           <div class="experience-item">
             <div class="experience-header">
               <div>
-                <div class="job-title">
-                  Chapter 4: Passing the Torch
-                </div>
-                <div class="company">Algoritm Education Center</div>
+                <div class="job-title">Chapter 3: Full Stack & Mobile</div>
+                <div class="company">Jahankeshde Hyzmat Individual Enterprise</div>
               </div>
               <div class="date-location">
-                Aug 2024 — Present<br />Mary, Turkmenistan
+                Mar 2024 — Present<br />Mary, Turkmenistan
               </div>
             </div>
             <ul class="achievements">
               <li>
-                Turned my experience into lessons — now teaching the next generation of developers
+                Architected and shipped "Ykjam Terjime" — a React Native translation app published on the App Store and Google Play
               </li>
               <li>
-                Built curriculum from scratch covering Python, React, Flutter, and more
+                Built backend APIs with Node.js and Express, handling authentication, real-time data, and third-party integrations
               </li>
               <li>
-                Watched students go from "Hello World" to shipping their own projects
+                Managed full product lifecycle: design, development, testing, deployment, and store submissions
               </li>
               <li>
-                The most rewarding chapter yet — seeing others succeed
+                Set up CI/CD pipelines and cloud infrastructure for production-grade applications
               </li>
             </ul>
           </div>
@@ -133,32 +144,7 @@
           <div class="experience-item">
             <div class="experience-header">
               <div>
-                <div class="job-title">Chapter 3: Building What You Don't See</div>
-                <div class="company">
-                  Jahankeshde Hyzmat Individual Enterprise
-                </div>
-              </div>
-              <div class="date-location">
-                Mar 2024 — Aug 2024<br />Mary, Turkmenistan
-              </div>
-            </div>
-            <ul class="achievements">
-              <li>
-                Switched to the backend — learned that the real magic happens behind the scenes
-              </li>
-              <li>
-                Built RESTful APIs with Django that actually scaled
-              </li>
-              <li>
-                Finally understood why databases matter (the hard way)
-              </li>
-            </ul>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <div>
-                <div class="job-title">Chapter 2: Crafting User Experiences</div>
+                <div class="job-title">Chapter 2: Frontend Developer</div>
                 <div class="company">Ynamly Geljek Individual Enterprise</div>
               </div>
               <div class="date-location">
@@ -167,16 +153,16 @@
             </div>
             <ul class="achievements">
               <li>
-                Graduated from intern to frontend developer — first real title
+                Built responsive web applications using React, Next.js, and TypeScript
               </li>
               <li>
-                Fell in love with React and never looked back
+                Implemented state management with Redux and Context API across multiple projects
               </li>
               <li>
-                Learned that good UI is invisible — users notice only when it's bad
+                Collaborated with backend teams to integrate RESTful APIs and optimize data flow
               </li>
               <li>
-                Shipped multiple projects that real people actually used
+                Shipped production features used by real users, improving UI/UX based on feedback
               </li>
             </ul>
           </div>
@@ -193,13 +179,13 @@
             </div>
             <ul class="achievements">
               <li>
-                First job, first codebase, first "it works on my machine" moment
+                Started as an intern building UI components with HTML, CSS, and JavaScript
               </li>
               <li>
-                Learned more in 4 months than in years of tutorials
+                Learned Git workflows, code reviews, and working in a team environment
               </li>
               <li>
-                Made mistakes, broke things, fixed them — the real education
+                Promoted to frontend developer within 4 months based on project contributions
               </li>
             </ul>
           </div>
@@ -590,202 +576,50 @@
         <section id="github" class="card fade-in collapsible collapsed" data-icon="fab fa-github" data-subtitle="Stats, repos & contributions">
           <h2>GitHub Activity</h2>
 
-          <!-- ============ Mini Statistics ============ -->
-          <div class="github-preview-card">
-            <h3 class="github-section-title"><i class="fas fa-chart-bar"></i> Quick Stats</h3>
-
-            <div class="github-mini-stats-preview">
-              <div class="mini-stat">
-                <i class="fas fa-book"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-repos-a">--</span>
-                  <span class="mini-stat-label">Repositories</span>
-                </div>
-              </div>
-              <div class="mini-stat">
-                <i class="fas fa-star"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-stars-a">--</span>
-                  <span class="mini-stat-label">Total Stars</span>
-                </div>
-              </div>
-              <div class="mini-stat">
-                <i class="fas fa-users"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-followers-a">--</span>
-                  <span class="mini-stat-label">Followers</span>
-                </div>
-              </div>
-              <div class="mini-stat">
-                <i class="fas fa-code-branch"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-forks-a">--</span>
-                  <span class="mini-stat-label">Total Forks</span>
-                </div>
+          <!-- Quick Stats -->
+          <div class="github-mini-stats-preview">
+            <div class="mini-stat">
+              <i class="fas fa-book"></i>
+              <div class="mini-stat-info">
+                <span class="mini-stat-value" id="gh-repos">--</span>
+                <span class="mini-stat-label">Repositories</span>
               </div>
             </div>
-
-            <p style="color: #64748b; font-size: 0.9rem;">
-              <i class="fas fa-info-circle"></i> Data loaded dynamically via GitHub API
-            </p>
-          </div>
-
-          <!-- ============ GitHub Readme Stats Cards ============ -->
-          <div class="github-preview-card">
-            <h3 class="github-section-title"><i class="fas fa-id-card"></i> GitHub Statistics</h3>
-
-            <div class="github-cards">
-              <img src="https://github-readme-stats.vercel.app/api?username=TheSeydiCharyyev&show_icons=true&theme=tokyonight&hide_border=true&bg_color=1e293b&title_color=fcd34d&icon_color=60a5fa&text_color=e2e8f0" alt="GitHub Stats" loading="lazy" />
-              <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=TheSeydiCharyyev&layout=compact&theme=tokyonight&hide_border=true&bg_color=1e293b&title_color=fcd34d&text_color=e2e8f0" alt="Top Languages" loading="lazy" />
+            <div class="mini-stat">
+              <i class="fas fa-star"></i>
+              <div class="mini-stat-info">
+                <span class="mini-stat-value" id="gh-stars">--</span>
+                <span class="mini-stat-label">Total Stars</span>
+              </div>
             </div>
-          </div>
-
-          <!-- ============ Streak Stats ============ -->
-          <div class="github-preview-card">
-            <h3 class="github-section-title"><i class="fas fa-fire"></i> Commit Streak</h3>
-
-            <div class="github-streak">
-              <img src="https://github-readme-streak-stats.herokuapp.com/?user=TheSeydiCharyyev&theme=tokyonight&hide_border=true&background=1e293b&ring=fcd34d&fire=fcd34d&currStreakLabel=fcd34d" alt="GitHub Streak" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- ============ Contribution Graph + Trophies ============ -->
-          <div class="github-preview-card">
-            <h3 class="github-section-title"><i class="fas fa-chart-line"></i> Contribution Activity</h3>
-
-            <div class="contribution-section">
-              <img src="https://github-readme-activity-graph.vercel.app/graph?username=TheSeydiCharyyev&theme=tokyo-night&hide_border=true&bg_color=1e293b&color=e2e8f0&line=fcd34d&point=60a5fa" alt="Contribution Graph" loading="lazy" />
-            </div>
-
-            <div class="github-divider"></div>
-
-            <div class="contribution-section">
-              <h3><i class="fas fa-trophy"></i> Profile Trophies</h3>
-              <img src="https://github-profile-trophy.vercel.app/?username=TheSeydiCharyyev&theme=discord&no-frame=true&no-bg=true&column=4&margin-w=15" alt="GitHub Trophies" loading="lazy" />
-            </div>
-          </div>
-
-          <!-- ============ Top Repositories ============ -->
-          <div class="github-preview-card">
-            <h3 class="github-section-title"><i class="fas fa-folder-open"></i> Featured Repositories</h3>
-
-            <div class="github-repos-preview" id="gh-repos-grid">
-              <div class="github-loading-placeholder">
-                <i class="fas fa-spinner fa-spin"></i>
-                Loading repositories...
+            <div class="mini-stat">
+              <i class="fas fa-users"></i>
+              <div class="mini-stat-info">
+                <span class="mini-stat-value" id="gh-followers">--</span>
+                <span class="mini-stat-label">Followers</span>
               </div>
             </div>
           </div>
 
-          <!-- ============ Open Source Contributions ============ -->
-          <div class="github-preview-card">
-            <h3 class="github-section-title"><i class="fas fa-hands-helping"></i> Open Source Contributions</h3>
-
-            <p style="color: #94a3b8; margin-bottom: 20px;">
-              When you start contributing to open source, you can showcase it here:
-            </p>
-
-            <div class="github-repos-preview">
-              <div class="repo-card-preview">
-                <div class="repo-name">
-                  <i class="fab fa-github"></i>
-                  facebook/react
-                </div>
-                <div class="repo-desc">
-                  Example: Fixed documentation bug, added tests
-                </div>
-                <div class="repo-stats">
-                  <span><i class="fas fa-code-pull-request"></i> 3 PRs merged</span>
-                  <span><i class="fas fa-check-circle" style="color: #22c55e;"></i> Contributor</span>
-                </div>
-              </div>
-
-              <div class="repo-card-preview">
-                <div class="repo-name">
-                  <i class="fab fa-github"></i>
-                  flutter/flutter
-                </div>
-                <div class="repo-desc">
-                  Example: Improved widget performance
-                </div>
-                <div class="repo-stats">
-                  <span><i class="fas fa-code-pull-request"></i> 1 PR merged</span>
-                  <span><i class="fas fa-check-circle" style="color: #22c55e;"></i> Contributor</span>
-                </div>
-              </div>
-
-              <div class="repo-card-preview example">
-                <div class="repo-name">
-                  <i class="fas fa-plus-circle"></i>
-                  Your future contribution
-                </div>
-                <div class="repo-desc">
-                  Start contributing and add your achievements here!
-                </div>
-                <div class="repo-stats">
-                  <span><i class="fas fa-rocket"></i> Coming soon...</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="github-info-box">
-              <h4><i class="fas fa-lightbulb"></i> Tip</h4>
-              <p>
-                For tracking contributions you can use:
-                <br>• <strong>GitHub Profile</strong> — shows which repos you contributed to
-                <br>• <strong>Manual list</strong> — add your PRs with descriptions
-                <br>• <strong>ossinsight.io</strong> — open source contribution analytics
-              </p>
-            </div>
+          <!-- GitHub Stats Cards -->
+          <div class="github-cards">
+            <img src="https://github-readme-stats.vercel.app/api?username=TheSeydiCharyyev&show_icons=true&theme=default&hide_border=true&bg_color=ffffff&title_color=1e293b&icon_color=3b82f6&text_color=64748b" alt="GitHub Stats" loading="lazy" />
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=TheSeydiCharyyev&layout=compact&theme=default&hide_border=true&bg_color=ffffff&title_color=1e293b&text_color=64748b" alt="Top Languages" loading="lazy" />
           </div>
 
-          <!-- ============ COMBO ============ -->
-          <div class="github-preview-card recommended">
-            <h3 class="github-section-title"><i class="fas fa-star"></i> GitHub Activity Combo</h3>
+          <!-- Streak -->
+          <div class="github-streak">
+            <img src="https://github-readme-streak-stats.herokuapp.com/?user=TheSeydiCharyyev&theme=default&hide_border=true&background=ffffff&ring=3b82f6&fire=3b82f6&currStreakLabel=1e293b" alt="GitHub Streak" loading="lazy" />
+          </div>
 
-            <!-- Mini stats -->
-            <div class="github-mini-stats-preview">
-              <div class="mini-stat">
-                <i class="fas fa-book"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-repos">--</span>
-                  <span class="mini-stat-label">Repositories</span>
-                </div>
-              </div>
-              <div class="mini-stat">
-                <i class="fas fa-star"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-stars">--</span>
-                  <span class="mini-stat-label">Total Stars</span>
-                </div>
-              </div>
-              <div class="mini-stat">
-                <i class="fas fa-code-commit"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" id="gh-followers">--</span>
-                  <span class="mini-stat-label">Followers</span>
-                </div>
-              </div>
-              <a href="https://github.com/TheSeydiCharyyev" target="_blank" rel="noopener" class="mini-stat clickable">
-                <i class="fab fa-github"></i>
-                <div class="mini-stat-info">
-                  <span class="mini-stat-value" style="font-size: 1rem;">View Profile</span>
-                  <span class="mini-stat-label">github.com</span>
-                </div>
-              </a>
-            </div>
-
-            <!-- Streak -->
-            <div class="github-streak" style="margin: 30px 0;">
-              <img src="https://github-readme-streak-stats.herokuapp.com/?user=TheSeydiCharyyev&theme=tokyonight&hide_border=true&background=1e293b&ring=fcd34d&fire=fcd34d&currStreakLabel=fcd34d" alt="GitHub Streak" loading="lazy" />
-            </div>
-
-            <!-- Top repos preview -->
-            <h4 style="color: #fde68a; margin-bottom: 15px; font-size: 1.1rem;">
-              <i class="fas fa-folder-open"></i> Featured Projects
-            </h4>
-            <div class="github-repos-preview" id="gh-featured-repos">
-              <!-- Will be populated by JS -->
+          <!-- Featured Repositories -->
+          <h4 style="color: #1e293b; margin: 24px 0 12px; font-size: 1.05rem; font-weight: 600;">
+            <i class="fas fa-folder-open" style="color: #64748b;"></i> Featured Repositories
+          </h4>
+          <div class="github-repos-preview" id="gh-repos-grid">
+            <div class="github-loading-placeholder">
+              <i class="fas fa-spinner fa-spin"></i>
+              Loading repositories...
             </div>
           </div>
 
@@ -820,13 +654,13 @@
             <h3>App Stores</h3>
             <p style="color: #64748b; margin-bottom: 15px; font-size: 0.95rem;">Where my apps live</p>
             <div class="profiles-grid">
-              <a href="#" class="profile-card googleplay" title="Google Play">
-                <i class="fab fa-google-play"></i>
-                <span>Google Play</span>
-              </a>
-              <a href="#" class="profile-card appstore" title="App Store">
+              <a href="https://apps.apple.com/app/ykjam-terjime/id6758071845" target="_blank" rel="noopener" class="profile-card appstore" title="App Store">
                 <i class="fab fa-app-store"></i>
                 <span>App Store</span>
+              </a>
+              <a href="https://play.google.com/store" target="_blank" rel="noopener" class="profile-card googleplay" title="Google Play">
+                <i class="fab fa-google-play"></i>
+                <span>Google Play</span>
               </a>
             </div>
           </div>
@@ -856,51 +690,44 @@
 
         <section id="languages" class="card fade-in collapsible collapsed" data-icon="fa-language" data-subtitle="Human languages I speak">
           <h2>Not Just Programming Languages</h2>
-          <p class="profiles-intro">Code isn't my only language</p>
           <div class="languages-grid">
             <div class="language-item">
               <img class="language-flag" src="https://flagcdn.com/w80/tm.png" alt="Turkmenistan">
               <div class="language-name">Turkmen</div>
               <div class="language-level">Native</div>
-              <div class="language-context">Where it all started</div>
             </div>
             <div class="language-item">
               <img class="language-flag" src="https://flagcdn.com/w80/ru.png" alt="Russia">
               <div class="language-name">Russian</div>
               <div class="language-level">C1</div>
-              <div class="language-context">Work, study, thinking</div>
             </div>
             <div class="language-item">
               <img class="language-flag" src="https://flagcdn.com/w80/gb.png" alt="United Kingdom">
               <div class="language-name">English</div>
               <div class="language-level">B2</div>
-              <div class="language-context">Code, docs, global communication</div>
             </div>
             <div class="language-item">
               <img class="language-flag" src="https://flagcdn.com/w80/de.png" alt="Germany">
               <div class="language-name">German</div>
               <div class="language-level">A2</div>
-              <div class="language-context">Opening doors to Europe</div>
             </div>
             <div class="language-item">
               <img class="language-flag" src="https://flagcdn.com/w80/fr.png" alt="France">
               <div class="language-name">French</div>
               <div class="language-level">A2</div>
-              <div class="language-context">The language of elegance</div>
             </div>
             <div class="language-item">
               <img class="language-flag" src="https://flagcdn.com/w80/cn.png" alt="China">
               <div class="language-name">Chinese</div>
               <div class="language-level">HSK 2</div>
-              <div class="language-context">1.4 billion new friends to make</div>
             </div>
           </div>
         </section>
 
 
         <section id="certifications" class="card fade-in collapsible collapsed" data-icon="fa-award" data-subtitle="200+ certificates & counting">
-          <h2>Learning Never Stops — 200+ Reasons to Trust Me (Yes, I Have the Papers)</h2>
-          <p class="cert-intro">From fundamentals to advanced — proof that I never stop learning</p>
+          <h2>200+ Certificates & Counting</h2>
+          <p class="cert-intro">From fundamentals to advanced — organized by domain</p>
           <div class="cert-grid">
             <a href="certifications/frontend.html" class="cert-category-card">
               <div class="cert-icon frontend"><i class="fas fa-code"></i></div>
@@ -985,33 +812,27 @@
 
         <section id="education" class="card fade-in collapsible collapsed" data-icon="fa-graduation-cap" data-subtitle="Where the journey began">
           <h2>The First Chapter</h2>
-          <p class="profiles-intro">Before the first line of code, there was curiosity</p>
-
           <div class="education-block">
             <h3 class="education-title">State Energy Institute of Turkmenistan</h3>
             <p class="education-degree">
-              <strong>Specialist degree in Electronics</strong> | 2014-2019
+              <strong>Specialist degree in Electronics</strong> | 2014 — 2019
             </p>
             <p class="education-description">
-              Started with circuits, ended up loving code. Learned that hardware and software
-              are just two sides of the same coin.
+              Engineering fundamentals, circuit design, and the foundation that led to software development.
             </p>
           </div>
 
           <div class="volunteer-section">
-            <h4 class="volunteer-title">Plot Twists Along the Way</h4>
+            <h4 class="volunteer-title">Other Experience</h4>
             <ul class="volunteer-list">
               <li>
-                <strong>Asian Games 2017</strong> — Translated for athletes from 45 countries.
-                First time realizing languages open doors.
+                <strong>Asian Games 2017</strong> — Volunteer translator for delegations from 45 countries
               </li>
               <li>
-                <strong>Amul-Hazar Rally 2018</strong> — International rally across Turkmenistan.
-                Helped teams communicate when GPS couldn't.
+                <strong>Amul-Hazar Rally 2018</strong> — Communication support for international teams
               </li>
               <li>
-                <strong>Army Radio Chief 2019-2021</strong> — Yes, I ran a radio station in the military.
-                Learned leadership the hard way.
+                <strong>Military Service 2019 — 2021</strong> — Radio communications chief
               </li>
             </ul>
           </div>
@@ -1020,7 +841,7 @@
         <section id="contact" class="cta-section fade-in collapsible collapsed" data-icon="fa-paper-plane" data-subtitle="Let's connect">
           <h2>Got an Idea? Let's Make It Real</h2>
           <p class="cta-description">
-            Have a project in mind? Looking for a mentor? Or just want to talk code? Let's connect.
+            Have a project in mind? Need a developer? Let's talk.
           </p>
           <a class="cta-button email" href="mailto:seydi.charyev@gmail.com">
             <i class="fas fa-envelope"></i> Drop a Message

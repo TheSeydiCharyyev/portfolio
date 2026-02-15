@@ -178,7 +178,7 @@ h1 {
 }
 
 .sections-grid > .collapsible.collapsed h2 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 0;
 }
 
@@ -186,10 +186,123 @@ h1 {
   display: none;
 }
 
-/* Expanded section - full width */
+/* Expanded section - hidden, content moves to modal */
 .sections-grid > .collapsible:not(.collapsed) {
-  grid-column: 1 / -1;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
+}
+
+/* ==================== SECTION MODAL ==================== */
+.section-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow-y: auto;
+}
+
+.section-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.section-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 960px;
+  padding: 48px;
+  position: relative;
+  transform: translateY(30px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  margin: auto;
+}
+
+.section-modal-overlay.active .section-modal {
+  transform: translateY(0) scale(1);
+}
+
+.section-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.section-modal-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.section-modal-title::after {
+  display: none;
+}
+
+.section-modal-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.section-modal-close:hover {
+  background: #e2e8f0;
+  color: #1a1a1a;
+}
+
+.section-modal-body {
+  color: #1a1a1a;
+}
+
+/* Dark mode modal */
+body.dark-mode .section-modal {
+  background: #1e293b;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .section-modal-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .section-modal-title {
+  color: #f1f5f9;
+}
+
+body.dark-mode .section-modal-close {
+  background: #334155;
+  color: #94a3b8;
+}
+
+body.dark-mode .section-modal-close:hover {
+  background: #475569;
+  color: #f1f5f9;
+}
+
+body.dark-mode .section-modal-body {
+  color: #e2e8f0;
 }
 
 /* Section icon */
@@ -258,19 +371,20 @@ h1 {
 }
 
 /* ==================== SECTION ACCENT COLORS ==================== */
-.sections-grid > .collapsible.collapsed:hover {
-  border-left-color: #1e293b;
-}
 
 /* ==================== DARK MODE - BENTO GRID ==================== */
 body.dark-mode .sections-grid > .collapsible.collapsed {
-  background: #1e293b;
+  background: transparent;
   border-color: #334155;
 }
 
 body.dark-mode .sections-grid > .collapsible.collapsed:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+body.dark-mode .sections-grid > .collapsible:not(.collapsed) {
   background: #1e293b;
-  border-color: #475569;
+  border-color: #334155;
 }
 
 body.dark-mode .section-subtitle {
@@ -793,9 +907,9 @@ body.dark-mode .skill-group-label {
 
 /* Override collapsed card style for CTA */
 .sections-grid > .cta-section.collapsed {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #94a3b8;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
   color: inherit;
 }
 

@@ -6,7 +6,6 @@ function initDarkMode() {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
-    if (darkModeToggle) darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
   }
 
   if (darkModeToggle) {
@@ -14,7 +13,6 @@ function initDarkMode() {
       document.body.classList.toggle("dark-mode");
       const isDark = document.body.classList.contains("dark-mode");
       localStorage.setItem("theme", isDark ? "dark" : "light");
-      darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     });
   }
 }
@@ -42,8 +40,10 @@ function initScrollToTop() {
 function initNavigation() {
   const navLinks = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll("section[id]");
+  let clickLock = false;
 
   function updateActiveNav() {
+    if (clickLock) return;
     const scrollPos = window.scrollY + 100;
 
     sections.forEach((section) => {
@@ -62,6 +62,20 @@ function initNavigation() {
     });
   }
 
+  // Highlight section + set active nav on click
+  navLinks.forEach(function(link) {
+    link.addEventListener("click", function() {
+      // Manually set active state on clicked link
+      navLinks.forEach(function(l) { l.classList.remove("active"); });
+      link.classList.add("active");
+      highlightTargetSection(link);
+
+      // Block scroll detection briefly so it doesn't override
+      clickLock = true;
+      setTimeout(function() { clickLock = false; }, 1000);
+    });
+  });
+
   window.addEventListener("scroll", updateActiveNav);
   updateActiveNav();
 }
@@ -77,14 +91,37 @@ function initMobileNav() {
       navToggle.classList.toggle("active");
     });
 
-    // Close menu when clicking a link
+    // Close menu when clicking a link + highlight target section
     navMenu.querySelectorAll(".nav-link").forEach((link) => {
       link.addEventListener("click", () => {
         navMenu.classList.remove("active");
         navToggle.classList.remove("active");
+        highlightTargetSection(link);
       });
     });
   }
+}
+
+// Highlight target section when nav link is clicked
+function highlightTargetSection(link) {
+  var href = link.getAttribute('href');
+  if (!href || !href.startsWith('#')) return;
+  var section = document.querySelector(href);
+  if (!section) return;
+
+  // Remove highlight from all sections first
+  document.querySelectorAll('.section-highlight').forEach(function(el) {
+    el.classList.remove('section-highlight');
+  });
+
+  // Add highlight after a short delay (wait for scroll)
+  setTimeout(function() {
+    section.classList.add('section-highlight');
+    // Remove after animation completes
+    setTimeout(function() {
+      section.classList.remove('section-highlight');
+    }, 2000);
+  }, 300);
 }
 
 // GitHub Stats

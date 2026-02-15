@@ -201,9 +201,9 @@ h1 {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 0;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -217,19 +217,20 @@ h1 {
 
 .section-modal {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 0;
   width: 100%;
-  max-width: 960px;
-  padding: 48px;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 48px 60px;
   position: relative;
-  transform: translateY(30px) scale(0.97);
+  transform: translateY(30px);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-  margin: auto;
+  box-shadow: none;
+  margin: 0;
 }
 
 .section-modal-overlay.active .section-modal {
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
 .section-modal-header {
@@ -750,9 +751,9 @@ body.dark-mode .skill-group-label {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #475569, #334155);
   box-shadow:
-    0 4px 12px rgba(37, 99, 235, 0.3),
+    0 4px 12px rgba(71, 85, 105, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
@@ -765,21 +766,21 @@ body.dark-mode .skill-group-label {
 }
 
 .profile-card:hover {
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-4px);
   background: rgba(248, 250, 252, 0.95);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .profile-card:hover i {
   transform: scale(1.05) translateY(-2px);
   box-shadow:
-    0 8px 20px rgba(37, 99, 235, 0.4),
+    0 8px 20px rgba(71, 85, 105, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .profile-card:hover span {
-  color: #1d4ed8;
+  color: #1e293b;
 }
 
 /* Profile brand colors */
@@ -1024,45 +1025,47 @@ body.dark-mode .sections-grid > .cta-section.collapsed h2 {
 }
 
 .shipped-title {
-  border-color: #2563eb;
-  color: #2563eb;
+  border-color: #1e293b;
+  color: #1e293b;
 }
 
 .in-progress-title {
-  border-color: #2563eb;
-  color: #2563eb;
+  border-color: #94a3b8;
+  color: #64748b;
 }
 
 /* Project Cards */
 .project-card {
   backdrop-filter: blur(10px);
-  color: white;
-  text-align: center;
-  padding: 50px;
-  border-radius: 16px;
+  color: #1a1a1a;
+  padding: 35px;
+  border-radius: 12px;
   margin: 15px 0;
   transition: all 0.3s ease;
 }
 
 .project-card.shipped {
-  background: rgba(37, 99, 235, 0.05);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   color: inherit;
 }
 
 .project-card.shipped:hover {
   transform: translateY(-3px);
-  background: rgba(37, 99, 235, 0.08);
-  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .project-card.in-progress {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  color: inherit;
 }
 
 .project-card.in-progress:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .project-card h4 {
@@ -1076,6 +1079,57 @@ body.dark-mode .sections-grid > .cta-section.collapsed h2 {
   font-weight: 400;
   line-height: 1.6;
   margin-bottom: 16px;
+}
+
+.project-card a {
+  color: #1e293b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.project-card a:hover {
+  color: #475569;
+}
+
+body.dark-mode .project-card a {
+  color: #e2e8f0;
+}
+
+body.dark-mode .project-card a:hover {
+  color: #94a3b8;
+}
+
+/* Store Badges */
+.project-store-badges {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.store-badge {
+  height: 40px;
+  width: auto;
+  transition: transform 0.2s ease;
+}
+
+.store-badge:hover {
+  transform: scale(1.05);
+}
+
+.store-badge-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.store-badge-soon .badge-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-style: italic;
 }
 
 /* Legacy support */
@@ -1190,6 +1244,10 @@ body.dark-mode .sections-grid > .cta-section.collapsed h2 {
 
 /* Small Tablets and Large Phones */
 @media (max-width: 768px) {
+  .section-modal {
+    padding: 30px 25px;
+  }
+
   .sections-grid {
     grid-template-columns: 1fr;
     padding: 0 15px;
@@ -1420,6 +1478,10 @@ body.dark-mode .sections-grid > .cta-section.collapsed h2 {
 
 /* Small Phones */
 @media (max-width: 480px) {
+  .section-modal {
+    padding: 20px 16px;
+  }
+
   .sections-grid {
     padding: 0 12px;
     gap: 12px;
@@ -2399,10 +2461,10 @@ body.dark-mode .profile-card {
 }
 
 body.dark-mode .profile-card i {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #64748b, #475569);
   color: white;
   box-shadow:
-    0 4px 12px rgba(59, 130, 246, 0.4),
+    0 4px 12px rgba(71, 85, 105, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -2412,19 +2474,19 @@ body.dark-mode .profile-card span {
 
 body.dark-mode .profile-card:hover {
   background: rgba(51, 65, 85, 0.8);
-  border-color: #fcd34d;
-  box-shadow: 0 8px 25px rgba(252, 211, 77, 0.15);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .profile-card:hover i {
-  background: linear-gradient(135deg, #fcd34d, #f59e0b);
+  background: linear-gradient(135deg, #94a3b8, #64748b);
   box-shadow:
-    0 8px 20px rgba(252, 211, 77, 0.4),
+    0 8px 20px rgba(100, 116, 139, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 body.dark-mode .profile-card:hover span {
-  color: #fcd34d;
+  color: #f1f5f9;
 }
 
 /* Dark mode profile brand colors */
@@ -2485,6 +2547,36 @@ body.dark-mode .profile-card.stackoverflow:hover i {
 
 body.dark-mode .project-placeholder {
   background: linear-gradient(135deg, #b91c1c 0%, #c2410c 100%);
+}
+
+body.dark-mode .shipped-title {
+  border-color: #f1f5f9;
+  color: #f1f5f9;
+}
+
+body.dark-mode .in-progress-title {
+  border-color: #64748b;
+  color: #94a3b8;
+}
+
+body.dark-mode .project-card.shipped {
+  background: rgba(51, 65, 85, 0.3);
+  border-color: rgba(71, 85, 105, 0.5);
+}
+
+body.dark-mode .project-card.shipped:hover {
+  border-color: #475569;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .project-card.in-progress {
+  background: rgba(51, 65, 85, 0.3);
+  border-color: rgba(71, 85, 105, 0.5);
+}
+
+body.dark-mode .project-card.in-progress:hover {
+  border-color: #475569;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .cta-section {
@@ -2572,15 +2664,15 @@ body.dark-mode .project-placeholder em {
 
 .cert-category-card:hover {
   background: rgba(248, 250, 252, 0.95);
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .cert-category-card:hover .cert-icon {
   transform: scale(1.05);
   box-shadow:
-    0 8px 20px rgba(37, 99, 235, 0.4),
+    0 8px 20px rgba(71, 85, 105, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -2588,13 +2680,13 @@ body.dark-mode .project-placeholder em {
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #475569, #334155);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   box-shadow:
-    0 4px 12px rgba(37, 99, 235, 0.3),
+    0 4px 12px rgba(71, 85, 105, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
@@ -2605,51 +2697,7 @@ body.dark-mode .project-placeholder em {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
-/* Certification category colors */
-.cert-icon.frontend {
-  background: linear-gradient(135deg, #61DAFB, #00B4D8);
-  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.4);
-}
-
-.cert-icon.backend {
-  background: linear-gradient(135deg, #68A063, #3C873A);
-  box-shadow: 0 4px 12px rgba(60, 135, 58, 0.4);
-}
-
-.cert-icon.fullstack {
-  background: linear-gradient(135deg, #764ABC, #512DA8);
-  box-shadow: 0 4px 12px rgba(118, 74, 188, 0.4);
-}
-
-.cert-icon.mobile {
-  background: linear-gradient(135deg, #02569B, #0175C2);
-  box-shadow: 0 4px 12px rgba(2, 86, 155, 0.4);
-}
-
-.cert-icon.cloud {
-  background: linear-gradient(135deg, #FF9900, #FF6600);
-  box-shadow: 0 4px 12px rgba(255, 153, 0, 0.4);
-}
-
-.cert-icon.ai {
-  background: linear-gradient(135deg, #E91E63, #9C27B0);
-  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
-}
-
-.cert-icon.uxui {
-  background: linear-gradient(135deg, #FF6B6B, #EE5A24);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-}
-
-.cert-icon.python {
-  background: linear-gradient(135deg, #3776AB, #FFD43B);
-  box-shadow: 0 4px 12px rgba(55, 118, 171, 0.4);
-}
-
-.cert-icon.languages {
-  background: linear-gradient(135deg, #00BFA5, #00897B);
-  box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
-}
+/* Certification category colors - all neutral */
 
 .cert-info {
   flex: 1;
@@ -2674,7 +2722,7 @@ body.dark-mode .project-placeholder em {
 }
 
 .cert-count {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #475569, #334155);
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
@@ -2690,7 +2738,7 @@ body.dark-mode .project-placeholder em {
 }
 
 .cert-linkedin a {
-  color: #2563eb;
+  color: #475569;
   text-decoration: none;
   font-weight: 500;
   display: inline-flex;
@@ -2702,7 +2750,7 @@ body.dark-mode .project-placeholder em {
 }
 
 .cert-linkedin a:hover {
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(100, 116, 139, 0.1);
 }
 
 .cert-linkedin i {
@@ -2714,9 +2762,9 @@ body.dark-mode .project-placeholder em {
   text-align: center;
   margin-top: 30px;
   padding: 30px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05));
+  background: rgba(100, 116, 139, 0.05);
   border-radius: 16px;
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(100, 116, 139, 0.15);
 }
 
 .cert-linkedin-cta p {
@@ -2762,12 +2810,12 @@ body.dark-mode .cert-category-card {
 
 body.dark-mode .cert-category-card:hover {
   background: rgba(51, 65, 85, 0.5);
-  border-color: #3b82f6;
+  border-color: #94a3b8;
 }
 
 body.dark-mode .cert-category-card:hover .cert-icon {
   box-shadow:
-    0 8px 20px rgba(59, 130, 246, 0.5),
+    0 8px 20px rgba(100, 116, 139, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -2784,16 +2832,16 @@ body.dark-mode .cert-linkedin {
 }
 
 body.dark-mode .cert-linkedin a {
-  color: #60a5fa;
+  color: #e2e8f0;
 }
 
 body.dark-mode .cert-linkedin a:hover {
-  background: rgba(96, 165, 250, 0.1);
+  background: rgba(100, 116, 139, 0.15);
 }
 
 body.dark-mode .cert-linkedin-cta {
-  background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.05));
-  border-color: rgba(96, 165, 250, 0.2);
+  background: rgba(100, 116, 139, 0.1);
+  border-color: rgba(100, 116, 139, 0.2);
 }
 
 body.dark-mode .cert-linkedin-cta p {
@@ -2877,14 +2925,14 @@ body.dark-mode .cert-linkedin-cta p {
 }
 
 .github-stat-item:hover {
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .github-stat-item i {
   font-size: 1.4rem;
-  color: #2563eb;
+  color: #475569;
 }
 
 .github-stat-info {
@@ -2940,7 +2988,7 @@ body.dark-mode .cert-linkedin-cta p {
 }
 
 .github-section-title i {
-  color: #2563eb;
+  color: #475569;
 }
 
 /* Activity Graph */
@@ -2984,9 +3032,9 @@ body.dark-mode .cert-linkedin-cta p {
 }
 
 .github-repo-card:hover {
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .github-repo-card.loading {
@@ -2995,7 +3043,7 @@ body.dark-mode .cert-linkedin-cta p {
 }
 
 .github-repo-name {
-  color: #2563eb;
+  color: #1e293b;
   font-weight: 600;
   font-size: 1.05rem;
   margin-bottom: 8px;
@@ -3041,8 +3089,8 @@ body.dark-mode .cert-linkedin-cta p {
 }
 
 .github-opensource-placeholder {
-  background: rgba(37, 99, 235, 0.05);
-  border: 2px dashed rgba(37, 99, 235, 0.2);
+  background: rgba(100, 116, 139, 0.05);
+  border: 2px dashed rgba(100, 116, 139, 0.2);
   border-radius: 12px;
   padding: 40px;
   text-align: center;
@@ -3051,7 +3099,7 @@ body.dark-mode .cert-linkedin-cta p {
 
 .github-opensource-placeholder i {
   font-size: 2.5rem;
-  color: #2563eb;
+  color: #475569;
   margin-bottom: 15px;
   display: block;
 }
@@ -3078,20 +3126,20 @@ body.dark-mode .cert-linkedin-cta p {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #2563eb;
+  color: #475569;
   text-decoration: none;
   font-weight: 600;
   padding: 14px 28px;
   border-radius: 10px;
   transition: all 0.3s ease;
-  background: rgba(37, 99, 235, 0.05);
-  border: 1px solid rgba(37, 99, 235, 0.1);
+  background: rgba(100, 116, 139, 0.05);
+  border: 1px solid rgba(100, 116, 139, 0.1);
 }
 
 .github-profile-link a:hover {
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(100, 116, 139, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .github-profile-link a i {
@@ -3105,12 +3153,12 @@ body.dark-mode .github-stat-item {
 }
 
 body.dark-mode .github-stat-item:hover {
-  border-color: #fcd34d;
-  box-shadow: 0 8px 25px rgba(252, 211, 77, 0.15);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .github-stat-item i {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .github-stat-value {
@@ -3126,7 +3174,7 @@ body.dark-mode .github-section-title {
 }
 
 body.dark-mode .github-section-title i {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .github-repo-card {
@@ -3135,12 +3183,12 @@ body.dark-mode .github-repo-card {
 }
 
 body.dark-mode .github-repo-card:hover {
-  border-color: #60a5fa;
-  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.15);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .github-repo-name {
-  color: #60a5fa;
+  color: #e2e8f0;
 }
 
 body.dark-mode .github-repo-desc {
@@ -3152,12 +3200,12 @@ body.dark-mode .github-repo-meta {
 }
 
 body.dark-mode .github-opensource-placeholder {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.2);
+  background: rgba(100, 116, 139, 0.1);
+  border-color: rgba(100, 116, 139, 0.3);
 }
 
 body.dark-mode .github-opensource-placeholder i {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .github-opensource-placeholder h4 {
@@ -3173,14 +3221,14 @@ body.dark-mode .github-profile-link {
 }
 
 body.dark-mode .github-profile-link a {
-  color: #60a5fa;
-  background: rgba(96, 165, 250, 0.1);
-  border-color: rgba(96, 165, 250, 0.2);
+  color: #e2e8f0;
+  background: rgba(100, 116, 139, 0.1);
+  border-color: rgba(100, 116, 139, 0.2);
 }
 
 body.dark-mode .github-profile-link a:hover {
-  background: rgba(96, 165, 250, 0.2);
-  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.2);
+  background: rgba(100, 116, 139, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive GitHub */
@@ -3239,7 +3287,7 @@ body.dark-mode .github-profile-link a:hover {
 
 /* Option Label */
 .github-option-label {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #475569, #334155);
   color: white;
   padding: 6px 14px;
   border-radius: 20px;
@@ -3265,8 +3313,8 @@ body.dark-mode .github-profile-link a:hover {
 }
 
 .github-preview-card:hover {
-  border-color: #2563eb;
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.1);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .github-preview-card.recommended {
@@ -3299,14 +3347,14 @@ body.dark-mode .github-profile-link a:hover {
 }
 
 .mini-stat:hover {
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .mini-stat i {
   font-size: 1.4rem;
-  color: #2563eb;
+  color: #475569;
 }
 
 .mini-stat-info {
@@ -3353,9 +3401,9 @@ body.dark-mode .github-profile-link a:hover {
 }
 
 .repo-card-preview:hover {
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .repo-card-preview.example {
@@ -3364,7 +3412,7 @@ body.dark-mode .github-profile-link a:hover {
 }
 
 .repo-card-preview .repo-name {
-  color: #2563eb;
+  color: #1e293b;
   font-weight: 600;
   font-size: 1.05rem;
   margin-bottom: 8px;
@@ -3422,7 +3470,7 @@ body.dark-mode .github-profile-link a:hover {
 }
 
 .contribution-section h3 i {
-  color: #2563eb;
+  color: #475569;
 }
 
 .contribution-section img {
@@ -3451,20 +3499,20 @@ body.dark-mode .github-profile-link a:hover {
   font-size: 2rem;
   margin-bottom: 10px;
   display: block;
-  color: #2563eb;
+  color: #475569;
 }
 
 /* Info Box */
 .github-info-box {
   margin-top: 25px;
   padding: 20px;
-  background: rgba(37, 99, 235, 0.05);
+  background: rgba(100, 116, 139, 0.05);
   border-radius: 12px;
-  border-left: 4px solid #2563eb;
+  border-left: 4px solid #94a3b8;
 }
 
 .github-info-box h4 {
-  color: #2563eb;
+  color: #475569;
   margin-bottom: 10px;
   font-size: 1rem;
   display: flex;
@@ -3486,8 +3534,8 @@ body.dark-mode .github-preview-card {
 }
 
 body.dark-mode .github-preview-card:hover {
-  border-color: #60a5fa;
-  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.15);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .github-preview-card.recommended {
@@ -3505,12 +3553,12 @@ body.dark-mode .mini-stat {
 }
 
 body.dark-mode .mini-stat:hover {
-  border-color: #fcd34d;
-  box-shadow: 0 8px 25px rgba(252, 211, 77, 0.15);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .mini-stat i {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .mini-stat-value {
@@ -3527,12 +3575,12 @@ body.dark-mode .repo-card-preview {
 }
 
 body.dark-mode .repo-card-preview:hover {
-  border-color: #60a5fa;
-  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.15);
+  border-color: #94a3b8;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .repo-card-preview .repo-name {
-  color: #60a5fa;
+  color: #e2e8f0;
 }
 
 body.dark-mode .repo-card-preview .repo-desc,
@@ -3545,7 +3593,7 @@ body.dark-mode .contribution-section h3 {
 }
 
 body.dark-mode .contribution-section h3 i {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .github-divider {
@@ -3558,16 +3606,16 @@ body.dark-mode .github-loading-placeholder {
 }
 
 body.dark-mode .github-loading-placeholder i {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .github-info-box {
-  background: rgba(59, 130, 246, 0.1);
-  border-left-color: #60a5fa;
+  background: rgba(100, 116, 139, 0.1);
+  border-left-color: #94a3b8;
 }
 
 body.dark-mode .github-info-box h4 {
-  color: #60a5fa;
+  color: #cbd5e1;
 }
 
 body.dark-mode .github-info-box p {
@@ -3688,6 +3736,225 @@ body.dark-mode .exp-collapsible:not(.exp-collapsed) .exp-toggle-icon {
 
 body.dark-mode .exp-collapsible:hover .exp-toggle-icon {
   color: #e2e8f0;
+}
+
+/* ==================== COLLAPSIBLE SKILL CATEGORIES ==================== */
+.skill-collapsible > h3 {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skill-toggle-icon {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  transition: transform 0.3s ease, color 0.2s ease;
+  margin-left: auto;
+}
+
+.skill-collapsible:not(.skill-collapsed) .skill-toggle-icon {
+  transform: rotate(180deg);
+  color: #475569;
+}
+
+.skill-collapsible:hover .skill-toggle-icon {
+  color: #1e293b;
+}
+
+.skill-collapsible .mobile-frameworks {
+  max-height: 3000px;
+  opacity: 1;
+  transition: max-height 0.5s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+.skill-collapsible.skill-collapsed .mobile-frameworks {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.skill-collapsible.skill-collapsed {
+  padding-bottom: 20px;
+}
+
+.skill-collapsible.skill-collapsed > h3 {
+  margin-bottom: 0;
+}
+
+/* Expanded skill category highlight */
+.section-modal-body .skill-collapsible:not(.skill-collapsed) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Dark mode */
+body.dark-mode .skill-toggle-icon {
+  color: #64748b;
+}
+
+body.dark-mode .skill-collapsible:not(.skill-collapsed) .skill-toggle-icon {
+  color: #cbd5e1;
+}
+
+body.dark-mode .skill-collapsible:hover .skill-toggle-icon {
+  color: #e2e8f0;
+}
+
+body.dark-mode .section-modal-body .skill-collapsible:not(.skill-collapsed) {
+  background: rgba(51, 65, 85, 0.3);
+  border-color: #475569;
+}
+
+/* ==================== COLLAPSIBLE FRAMEWORK SECTIONS ==================== */
+.fw-collapsible > h4 {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fw-toggle-icon {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  transition: transform 0.3s ease, color 0.2s ease;
+  margin-left: auto;
+}
+
+.fw-collapsible:not(.fw-collapsed) .fw-toggle-icon {
+  transform: rotate(180deg);
+  color: #475569;
+}
+
+.fw-collapsible:hover .fw-toggle-icon {
+  color: #1e293b;
+}
+
+.fw-collapsible > *:not(h4) {
+  max-height: 2000px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+.fw-collapsible.fw-collapsed > *:not(h4) {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.fw-collapsible.fw-collapsed {
+  padding-bottom: 16px;
+}
+
+.fw-collapsible.fw-collapsed > h4 {
+  margin-bottom: 0;
+}
+
+/* Dark mode */
+body.dark-mode .fw-toggle-icon {
+  color: #64748b;
+}
+
+body.dark-mode .fw-collapsible:not(.fw-collapsed) .fw-toggle-icon {
+  color: #cbd5e1;
+}
+
+body.dark-mode .fw-collapsible:hover .fw-toggle-icon {
+  color: #e2e8f0;
+}
+
+/* ==================== COMPACT SKILL ICONS IN MODAL ==================== */
+.section-modal-body .skill-tag.icon-only {
+  width: 56px;
+  padding: 8px 6px 6px;
+  gap: 4px;
+  border-radius: 10px;
+}
+
+.section-modal-body .skill-tag.icon-only i {
+  font-size: 1.8rem;
+}
+
+.section-modal-body .skill-tag.icon-only img {
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+}
+
+.section-modal-body .skill-tag.icon-only .skill-name {
+  font-size: 0.55rem;
+}
+
+.section-modal-body .skill-tags {
+  gap: 8px;
+}
+
+/* Compact profile cards in modal */
+.section-modal-body .profiles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section-modal-body .profile-card {
+  padding: 14px 18px;
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100px;
+}
+
+.section-modal-body .profile-card i {
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+}
+
+.section-modal-body .profile-card span {
+  font-size: 0.78rem;
+}
+
+/* Compact cert cards in modal */
+.section-modal-body .cert-category-card {
+  padding: 16px;
+  gap: 14px;
+}
+
+.section-modal-body .cert-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.section-modal-body .cert-icon i {
+  font-size: 1.1rem;
+}
+
+.section-modal-body .cert-info h3 {
+  font-size: 0.95rem;
+}
+
+.section-modal-body .cert-count {
+  padding: 5px 12px;
+  font-size: 0.8rem;
+}
+
+.section-modal-body .skill-group-label {
+  margin: 14px 0 8px;
+  font-size: 0.75rem;
+}
+
+.section-modal-body .framework-section {
+  padding: 20px;
+}
+
+.section-modal-body .mobile-frameworks {
+  gap: 20px;
 }
 
 .collapsible > *:not(h2) {

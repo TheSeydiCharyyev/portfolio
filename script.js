@@ -200,7 +200,7 @@ function initCollapsibleSections() {
     github:         { icon: 'fab fa-github',          subtitle: 'Stats, repos & contributions' },
     profiles:       { icon: 'fas fa-globe',           subtitle: 'Platforms & communities' },
     languages:      { icon: 'fas fa-language',        subtitle: 'Human languages I speak' },
-    certifications: { icon: 'fas fa-certificate',     subtitle: '200+ certificates & counting' },
+    certifications: { icon: 'fas fa-certificate',     subtitle: 'Yes, I have papers' },
     education:      { icon: 'fas fa-graduation-cap',  subtitle: 'Where the journey began' },
     contact:        { icon: 'fas fa-envelope',        subtitle: "Let's connect" }
   };
@@ -318,6 +318,30 @@ function initExperienceCollapse() {
   });
 }
 
+// Collapsible Skill Categories (event delegation for modal clones)
+function initSkillCollapse() {
+  document.addEventListener('click', function(e) {
+    var h3 = e.target.closest('.skill-collapsible > h3');
+    if (!h3) return;
+    var category = h3.closest('.skill-collapsible');
+    if (category) {
+      category.classList.toggle('skill-collapsed');
+    }
+  });
+}
+
+// Collapsible Framework Sections (event delegation for modal clones)
+function initFrameworkCollapse() {
+  document.addEventListener('click', function(e) {
+    var h4 = e.target.closest('.fw-collapsible > h4');
+    if (!h4) return;
+    var section = h4.closest('.fw-collapsible');
+    if (section) {
+      section.classList.toggle('fw-collapsed');
+    }
+  });
+}
+
 // Initialize everything on DOM ready
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize UI features
@@ -327,6 +351,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initMobileNav();
   initCollapsibleSections();
   initExperienceCollapse();
+  initSkillCollapse();
+  initFrameworkCollapse();
 
   // Initialize GitHub stats
   initGitHubStats();

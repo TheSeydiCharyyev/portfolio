@@ -210,7 +210,7 @@ function renderGitHubRepos(repos, containerId) {
   `).join('');
 }
 
-// Collapsible sections with bento grid icons & accordion
+// Collapsible sections with modal overlay
 function initCollapsibleSections() {
   var sectionConfig = {
     about:          { icon: 'fas fa-user',            subtitle: 'My story beyond the code' },
@@ -224,6 +224,47 @@ function initCollapsibleSections() {
     education:      { icon: 'fas fa-graduation-cap',  subtitle: 'Where the journey began' },
     contact:        { icon: 'fas fa-envelope',        subtitle: "Let's connect" }
   };
+
+  var modal = document.getElementById('section-modal');
+  var modalTitle = modal.querySelector('.section-modal-title');
+  var modalBody = modal.querySelector('.section-modal-body');
+  var modalClose = modal.querySelector('.section-modal-close');
+
+  function openModal(section) {
+    var h2 = section.querySelector('h2');
+    var headingText = h2.querySelector('.heading-text span:first-child');
+    modalTitle.textContent = headingText ? headingText.textContent : h2.textContent.trim();
+
+    // Clone all content except h2
+    modalBody.innerHTML = '';
+    Array.from(section.children).forEach(function(child) {
+      if (child.tagName !== 'H2') {
+        modalBody.appendChild(child.cloneNode(true));
+      }
+    });
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
 
   document.querySelectorAll('.collapsible').forEach(function(section) {
     var h2 = section.querySelector('h2');
@@ -242,7 +283,7 @@ function initCollapsibleSections() {
     var headingContent = document.createElement('span');
     headingContent.className = 'heading-content';
 
-    // Create icon circle if config exists
+    // Create icon if config exists
     if (config) {
       var iconCircle = document.createElement('span');
       iconCircle.className = 'section-icon-circle';
@@ -271,28 +312,16 @@ function initCollapsibleSections() {
     headingContent.appendChild(textWrapper);
     h2.appendChild(headingContent);
 
-    // Add chevron icon
-    var chevron = document.createElement('i');
-    chevron.className = 'fas fa-chevron-down collapse-icon';
-    h2.appendChild(chevron);
+    // Add arrow icon
+    var arrow = document.createElement('i');
+    arrow.className = 'fas fa-arrow-right collapse-icon';
+    h2.appendChild(arrow);
 
-    // Click handler with accordion behavior
+    // Keep section always collapsed, open modal on click
+    section.classList.add('collapsed');
+
     h2.addEventListener('click', function() {
-      var isCollapsed = section.classList.contains('collapsed');
-
-      if (isCollapsed) {
-        // Accordion: collapse all other sections first
-        document.querySelectorAll('.sections-grid .collapsible:not(.collapsed)').forEach(function(other) {
-          if (other !== section) {
-            other.classList.add('collapsed');
-          }
-        });
-        // Expand this one
-        section.classList.remove('collapsed');
-      } else {
-        // Collapse this section
-        section.classList.add('collapsed');
-      }
+      openModal(section);
     });
   });
 }

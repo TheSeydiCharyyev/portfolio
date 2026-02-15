@@ -294,7 +294,7 @@ function initCollapsibleSections() {
 
     // Add arrow icon
     var arrow = document.createElement('i');
-    arrow.className = 'fas fa-arrow-right collapse-icon';
+    arrow.className = 'fas fa-chevron-right collapse-icon';
     h2.appendChild(arrow);
 
     // Keep section always collapsed, open modal on click
@@ -306,6 +306,18 @@ function initCollapsibleSections() {
   });
 }
 
+// Collapsible Experience Chapters (event delegation for modal clones)
+function initExperienceCollapse() {
+  document.addEventListener('click', function(e) {
+    var header = e.target.closest('.exp-collapsible .experience-header');
+    if (!header) return;
+    var item = header.closest('.exp-collapsible');
+    if (item) {
+      item.classList.toggle('exp-collapsed');
+    }
+  });
+}
+
 // Initialize everything on DOM ready
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize UI features
@@ -314,6 +326,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initNavigation();
   initMobileNav();
   initCollapsibleSections();
+  initExperienceCollapse();
 
   // Initialize GitHub stats
   initGitHubStats();

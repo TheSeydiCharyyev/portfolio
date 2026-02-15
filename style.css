@@ -704,11 +704,12 @@ body.dark-mode .skill-group-label {
 }
 
 .achievements li::before {
-  content: "▶";
+  content: "—";
   position: absolute;
   left: 0;
-  color: #2563eb;
-  font-size: 0.8rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Profiles Section */
@@ -2532,7 +2533,7 @@ body.dark-mode .achievements li:hover {
 }
 
 body.dark-mode .achievements li::before {
-  color: #60a5fa;
+  color: #64748b;
 }
 
 body.dark-mode .project-placeholder h3,
@@ -3632,6 +3633,61 @@ body.dark-mode .github-info-box p {
 .collapsible.collapsed:hover h2 .collapse-icon {
   color: #1a1a1a;
   transform: translateX(3px);
+}
+
+/* ==================== COLLAPSIBLE EXPERIENCE CHAPTERS ==================== */
+.exp-collapsible .experience-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.exp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.exp-toggle-icon {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  transition: transform 0.3s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.exp-collapsible:not(.exp-collapsed) .exp-toggle-icon {
+  transform: rotate(180deg);
+  color: #2563eb;
+}
+
+.exp-collapsible:hover .exp-toggle-icon {
+  color: #1e293b;
+}
+
+.exp-collapsible .achievements {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+.exp-collapsible.exp-collapsed .achievements {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Dark mode */
+body.dark-mode .exp-toggle-icon {
+  color: #64748b;
+}
+
+body.dark-mode .exp-collapsible:not(.exp-collapsed) .exp-toggle-icon {
+  color: #60a5fa;
+}
+
+body.dark-mode .exp-collapsible:hover .exp-toggle-icon {
+  color: #e2e8f0;
 }
 
 .collapsible > *:not(h2) {

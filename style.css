@@ -856,10 +856,10 @@ body.dark-mode .skill-group-label {
 }
 
 .language-item:hover {
-  border-color: #2563eb;
+  border-color: #cbd5e1;
   transform: translateY(-2px);
   background: rgba(248, 250, 252, 0.9);
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .language-name {
@@ -880,10 +880,10 @@ body.dark-mode .skill-group-label {
 }
 
 .language-level {
-  color: #2563eb;
+  color: #475569;
   font-size: 0.875rem;
   font-weight: 600;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(100, 116, 139, 0.1);
   padding: 4px 12px;
   border-radius: 20px;
   display: inline-block;
@@ -2239,8 +2239,8 @@ body.dark-mode .header-quote {
 }
 
 body.dark-mode .language-level {
-  color: #60a5fa;
-  background: rgba(96, 165, 250, 0.15);
+  color: #e2e8f0;
+  background: rgba(100, 116, 139, 0.2);
 }
 
 body.dark-mode .language-context {
@@ -2308,7 +2308,7 @@ body.dark-mode .experience-item:hover,
 body.dark-mode .language-item:hover,
 body.dark-mode .framework-section:hover {
   background: rgba(51, 65, 85, 0.5);
-  border-color: #3b82f6;
+  border-color: #94a3b8;
 }
 
 body.dark-mode .volunteer-section {
@@ -3917,6 +3917,32 @@ body.dark-mode .fw-collapsible:hover .fw-toggle-icon {
 
 .section-modal-body .profile-card span {
   font-size: 0.78rem;
+}
+
+/* Compact language cards in modal */
+.section-modal-body .languages-grid {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 140px));
+  gap: 12px;
+}
+
+.section-modal-body .language-item {
+  padding: 16px 14px;
+}
+
+.section-modal-body .language-flag {
+  width: 48px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.section-modal-body .language-name {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.section-modal-body .language-level {
+  font-size: 0.78rem;
+  padding: 3px 10px;
 }
 
 /* Compact cert cards in modal */
